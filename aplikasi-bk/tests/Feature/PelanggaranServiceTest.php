@@ -65,6 +65,13 @@ class PelanggaranServiceTest extends TestCase
         $this->assertSame(25, $siswa->refresh()->total_poin);
         $this->assertSame('perhatian', $siswa->status_disiplin);
 
+        $jenis->update(['poin' => 40]);
+        $this->assertSame(25, $pelanggaran->refresh()->poin);
+
+        $service->perbarui($pelanggaran, ['poin' => 40]);
+        $this->assertSame(40, $siswa->refresh()->total_poin);
+        $this->assertSame('pembinaan', $siswa->status_disiplin);
+
         $service->hapus($pelanggaran);
 
         $this->assertSame(0, $siswa->refresh()->total_poin);

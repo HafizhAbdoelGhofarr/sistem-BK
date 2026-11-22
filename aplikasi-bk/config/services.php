@@ -35,4 +35,10 @@ return [
         ],
     ],
 
+    'sidobe' => [
+        'url' => env('SIDOBE_API_URL', 'https://api.sidobe.com/wa/v1'),
+        'secret_key' => env('SIDOBE_API_KEY'),
+        'timeout' => (int) env('SIDOBE_API_TIMEOUT', 15),
+    ],
+
 ];

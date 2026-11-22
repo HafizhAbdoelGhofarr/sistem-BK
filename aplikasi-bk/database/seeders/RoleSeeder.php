@@ -6,12 +6,15 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\PermissionRegistrar;
 
 class RoleSeeder extends Seeder
 {
     public function run(): void
     {
-        foreach (['admin', 'siswa', 'guru', 'guru_bk', 'wali_kelas'] as $role) {
+        app(PermissionRegistrar::class)->forgetCachedPermissions();
+
+        foreach (['admin', 'guru_bk', 'siswa'] as $role) {
             Role::findOrCreate($role, 'web');
         }
 
@@ -23,6 +26,10 @@ class RoleSeeder extends Seeder
                 'is_active' => true,
             ]
         );
+
+        if (! $admin->hasVerifiedEmail()) {
+            $admin->forceFill(['email_verified_at' => now()])->save();
+        }
 
         $admin->assignRole('admin');
     }
