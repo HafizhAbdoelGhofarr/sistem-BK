@@ -75,26 +75,37 @@ new #[Layout('layouts.app')] class extends Component
             ->with(['siswa.kelas', 'jenisPelanggaran', 'pelapor', 'notifikasiWa'])
             ->latest('tanggal');
 
-        // Jika login sebagai siswa, hanya tampilkan data diri sendiri
-        if (auth()->user()->hasRole('siswa')) {
-            $query->whereHas('siswa', fn ($q) => $q->where('user_id', auth()->id()));
-        }
+        $isSiswa = auth()->user()->hasRole('siswa');
+        $siswaLogin = null;
 
-        if ($this->search) {
-            $query->whereHas('siswa', fn ($q) => $q->where('nama', 'like', '%' . $this->search . '%')->orWhere('nis', 'like', '%' . $this->search . '%'));
-        }
+        // Jika login sebagai siswa, HANYA tampilkan data diri sendiri
+        if ($isSiswa) {
+            $siswaLogin = auth()->user()->siswa;
+            if ($siswaLogin) {
+                $query->where('siswa_id', $siswaLogin->id);
+            } else {
+                $query->whereHas('siswa', fn ($q) => $q->where('user_id', auth()->id()));
+            }
+        } else {
+            // Filter & Pencarian HANYA aktif untuk Guru BK / Admin
+            if ($this->search) {
+                $query->whereHas('siswa', fn ($q) => $q->where('nama', 'like', '%' . $this->search . '%')->orWhere('nis', 'like', '%' . $this->search . '%'));
+            }
 
-        if ($this->kelas_id) {
-            $query->whereHas('siswa', fn ($q) => $q->where('kelas_id', $this->kelas_id));
-        }
+            if ($this->kelas_id) {
+                $query->whereHas('siswa', fn ($q) => $q->where('kelas_id', $this->kelas_id));
+            }
 
-        if ($this->status_filter) {
-            $query->where('status', $this->status_filter);
+            if ($this->status_filter) {
+                $query->where('status', $this->status_filter);
+            }
         }
 
         return [
             'pelanggaranList' => $query->paginate(15),
             'kelasList' => Kelas::orderBy('nama')->get(),
+            'siswaLogin' => $siswaLogin ?? auth()->user()->siswa,
+            'isSiswa' => $isSiswa,
         ];
     }
 }; ?>
@@ -117,10 +128,15 @@ new #[Layout('layouts.app')] class extends Component
             <div class="flex items-center gap-2 text-xs text-gray-500 mb-1">
                 <a href="{{ route('dashboard') }}" wire:navigate class="hover:text-purple-700">Dashboard</a>
                 <span>&rsaquo;</span>
-                <span class="text-purple-700 font-semibold">Riwayat Pelanggaran</span>
+                <span class="text-purple-700 font-semibold">{{ $isSiswa ? 'Pelanggaran Saya' : 'Riwayat Pelanggaran' }}</span>
             </div>
-            <h1 class="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight">Daftar Pelanggaran Tata Tertib</h1>
-            <p class="text-xs text-gray-500 mt-0.5">Rekapitulasi catatan ketertiban siswa, poin akumulasi, dan status notifikasi WhatsApp</p>
+            @if ($isSiswa)
+                <h1 class="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight">Catatan Pelanggaran Saya</h1>
+                <p class="text-xs text-gray-500 mt-0.5">Monitoring ketertiban diri sendiri dan riwayat poin kedisiplinan yang tercatat di sekolah</p>
+            @else
+                <h1 class="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight">Daftar Pelanggaran Tata Tertib</h1>
+                <p class="text-xs text-gray-500 mt-0.5">Rekapitulasi catatan ketertiban siswa, poin akumulasi, dan status notifikasi WhatsApp</p>
+            @endif
         </div>
 
         @role('admin|guru_bk')
@@ -142,41 +158,74 @@ new #[Layout('layouts.app')] class extends Component
         @endrole
     </div>
 
-    <!-- Filter & Pencarian Bar -->
-    <div class="bg-white/95 backdrop-blur-md border border-purple-100/90 rounded-2xl p-4 sm:p-5 shadow-xs">
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
-            <!-- Search Nama Siswa / NIS -->
-            <div class="relative">
-                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                    </svg>
+    <!-- Khusus Siswa: Card Status Kedisiplinan Pribadi -->
+    @if ($isSiswa)
+        <div class="p-5 rounded-3xl bg-gradient-to-r from-purple-900 via-purple-800 to-indigo-900 text-white shadow-xl shadow-purple-950/15 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-2xl bg-white/15 backdrop-blur-md flex items-center justify-center text-white font-extrabold text-lg flex-shrink-0">
+                    {{ strtoupper(substr($siswaLogin?->nama ?? auth()->user()->name, 0, 1)) }}
                 </div>
-                <input wire:model.live.debounce.300ms="search" type="text" placeholder="Cari nama siswa atau NIS..."
-                       class="block w-full pl-10 py-2 border-gray-200 focus:border-purple-600 focus:ring-purple-500 rounded-xl text-xs text-gray-800 transition shadow-2xs">
+                <div>
+                    <span class="text-[11px] font-bold text-purple-200 uppercase tracking-wider block">Akun Siswa Terdaftar</span>
+                    <h2 class="text-lg font-bold">{{ $siswaLogin?->nama ?? auth()->user()->name }}</h2>
+                    <div class="text-xs text-purple-200 flex flex-wrap items-center gap-2 mt-0.5">
+                        <span>NIS: <strong class="text-white">{{ $siswaLogin?->nis ?? '-' }}</strong></span>
+                        <span>&bull;</span>
+                        <span>Kelas: <strong class="text-white">{{ $siswaLogin?->kelas?->nama ?? '-' }}</strong></span>
+                    </div>
+                </div>
             </div>
 
-            <!-- Filter Kelas -->
-            <div>
-                <select wire:model.live="kelas_id" class="block w-full py-2 border-gray-200 focus:border-purple-600 focus:ring-purple-500 rounded-xl text-xs text-gray-800 transition shadow-2xs">
-                    <option value="">Semua Rombel / Kelas</option>
-                    @foreach ($kelasList as $k)
-                        <option value="{{ $k->id }}">{{ $k->nama }}</option>
-                    @endforeach
-                </select>
-            </div>
-
-            <!-- Filter Status Pelanggaran -->
-            <div>
-                <select wire:model.live="status_filter" class="block w-full py-2 border-gray-200 focus:border-purple-600 focus:ring-purple-500 rounded-xl text-xs text-gray-800 transition shadow-2xs">
-                    <option value="">Semua Status Kasus</option>
-                    <option value="baru">Baru Dicatat</option>
-                    <option value="dibina">Dalam Pembinaan BK</option>
-                    <option value="selesai">Selesai / Ditutup</option>
-                </select>
+            <div class="flex items-center gap-5 sm:border-l sm:border-white/15 sm:pl-6">
+                <div>
+                    <span class="text-[10px] text-purple-200 uppercase block font-semibold">Akumulasi Poin:</span>
+                    <span class="text-2xl font-black text-rose-300">{{ $siswaLogin?->total_poin ?? 0 }} Poin</span>
+                </div>
+                <div>
+                    <span class="text-[10px] text-purple-200 uppercase block font-semibold mb-1">Status Disiplin:</span>
+                    <x-status-badge :status="$siswaLogin?->status_disiplin ?? 'aman'" />
+                </div>
             </div>
         </div>
-    </div>
+    @endif
+
+    <!-- Filter & Pencarian Bar (HANYA MUNCUL UNTUK GURU BK & ADMIN) -->
+    @role('admin|guru_bk')
+        <div class="bg-white/95 backdrop-blur-md border border-purple-100/90 rounded-2xl p-4 sm:p-5 shadow-xs">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
+                <!-- Search Nama Siswa / NIS -->
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </div>
+                    <input wire:model.live.debounce.300ms="search" type="text" placeholder="Cari nama siswa atau NIS..."
+                           class="block w-full pl-10 py-2 border-gray-200 focus:border-purple-600 focus:ring-purple-500 rounded-xl text-xs text-gray-800 transition shadow-2xs">
+                </div>
+
+                <!-- Filter Kelas -->
+                <div>
+                    <select wire:model.live="kelas_id" class="block w-full py-2 border-gray-200 focus:border-purple-600 focus:ring-purple-500 rounded-xl text-xs text-gray-800 transition shadow-2xs">
+                        <option value="">Semua Rombel / Kelas</option>
+                        @foreach ($kelasList as $k)
+                            <option value="{{ $k->id }}">{{ $k->nama }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <!-- Filter Status Pelanggaran -->
+                <div>
+                    <select wire:model.live="status_filter" class="block w-full py-2 border-gray-200 focus:border-purple-600 focus:ring-purple-500 rounded-xl text-xs text-gray-800 transition shadow-2xs">
+                        <option value="">Semua Status Kasus</option>
+                        <option value="baru">Baru Dicatat</option>
+                        <option value="dibina">Dalam Pembinaan BK</option>
+                        <option value="selesai">Selesai / Ditutup</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    @endrole
 
     <!-- Tabel Data Pelanggaran -->
     <div class="bg-white/95 backdrop-blur-md border border-purple-100/90 rounded-3xl shadow-sm overflow-hidden">
@@ -185,13 +234,15 @@ new #[Layout('layouts.app')] class extends Component
                 <thead>
                     <tr class="bg-purple-50/60 border-b border-purple-100/80 text-[11px] font-bold uppercase tracking-wider text-purple-900">
                         <th class="py-3.5 px-4">Tanggal</th>
-                        <th class="py-3.5 px-4">Nama Siswa & Kelas</th>
+                        @role('admin|guru_bk')
+                            <th class="py-3.5 px-4">Nama Siswa & Kelas</th>
+                        @endrole
                         <th class="py-3.5 px-4">Jenis Pelanggaran</th>
                         <th class="py-3.5 px-4 text-center">Bobot</th>
                         <th class="py-3.5 px-4">Status Kasus</th>
                         <th class="py-3.5 px-4">WhatsApp Ortu</th>
-                        <th class="py-3.5 px-4">Pelapor</th>
                         @role('admin|guru_bk')
+                            <th class="py-3.5 px-4">Pelapor</th>
                             <th class="py-3.5 px-4 text-center">Aksi</th>
                         @endrole
                     </tr>
@@ -204,13 +255,15 @@ new #[Layout('layouts.app')] class extends Component
                                 {{ \Carbon\Carbon::parse($item->tanggal)->translatedFormat('d M Y') }}
                             </td>
 
-                            <!-- Siswa & Kelas -->
-                            <td class="py-3.5 px-4 whitespace-nowrap">
-                                <div class="font-bold text-gray-900">{{ $item->siswa?->nama ?? 'Siswa Tidak Ditemukan' }}</div>
-                                <div class="text-[11px] text-gray-500">
-                                    NIS: {{ $item->siswa?->nis }} &bull; {{ $item->siswa?->kelas?->nama }}
-                                </div>
-                            </td>
+                            <!-- Siswa & Kelas (Hanya untuk Admin/Guru BK) -->
+                            @role('admin|guru_bk')
+                                <td class="py-3.5 px-4 whitespace-nowrap">
+                                    <div class="font-bold text-gray-900">{{ $item->siswa?->nama ?? 'Siswa Tidak Ditemukan' }}</div>
+                                    <div class="text-[11px] text-gray-500">
+                                        NIS: {{ $item->siswa?->nis }} &bull; {{ $item->siswa?->kelas?->nama }}
+                                    </div>
+                                </td>
+                            @endrole
 
                             <!-- Jenis Pelanggaran -->
                             <td class="py-3.5 px-4">
@@ -269,10 +322,12 @@ new #[Layout('layouts.app')] class extends Component
                                 @endif
                             </td>
 
-                            <!-- Pelapor -->
-                            <td class="py-3.5 px-4 whitespace-nowrap text-gray-500">
-                                {{ $item->pelapor?->name ?? 'Sistem' }}
-                            </td>
+                            <!-- Pelapor (Khusus Guru BK & Admin) -->
+                            @role('admin|guru_bk')
+                                <td class="py-3.5 px-4 whitespace-nowrap text-gray-500">
+                                    {{ $item->pelapor?->name ?? 'Sistem' }}
+                                </td>
+                            @endrole
 
                             <!-- Aksi Edit & Hapus (Admin & Guru BK) -->
                             @role('admin|guru_bk')
@@ -301,14 +356,18 @@ new #[Layout('layouts.app')] class extends Component
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="{{ auth()->user()->hasRole('siswa') ? 7 : 8 }}" class="py-12 text-center text-gray-400">
+                            <td colspan="{{ auth()->user()->hasRole('siswa') ? 5 : 8 }}" class="py-12 text-center text-gray-400">
                                 <div class="w-12 h-12 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center mx-auto mb-3">
                                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                                     </svg>
                                 </div>
-                                <span class="font-bold text-sm text-gray-700 block">Belum Ada Catatan Pelanggaran</span>
-                                <span class="text-xs text-gray-400">Siswa menjaga ketertiban sekolah dengan baik!</span>
+                                <span class="font-bold text-sm text-gray-700 block">
+                                    {{ auth()->user()->hasRole('siswa') ? 'Catatan Kedisiplinan Anda Bersih!' : 'Belum Ada Catatan Pelanggaran' }}
+                                </span>
+                                <span class="text-xs text-gray-400">
+                                    {{ auth()->user()->hasRole('siswa') ? 'Pertahankan sikap tertib dan budi pekerti luhur di sekolah.' : 'Siswa menjaga ketertiban sekolah dengan baik!' }}
+                                </span>
                             </td>
                         </tr>
                     @endforelse
