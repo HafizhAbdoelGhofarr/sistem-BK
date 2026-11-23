@@ -37,52 +37,84 @@ new #[Layout('layouts.guest')] class extends Component
 }; ?>
 
 <div>
-    <form wire:submit="register">
-        <!-- Name -->
+    <!-- Judul & Keterangan Form -->
+    <div class="mb-6 text-center">
+        <h2 class="text-2xl font-bold text-gray-900 tracking-tight">Daftar Akun Siswa</h2>
+        <p class="text-sm text-gray-500 mt-1">Lengkapi formulir di bawah ini untuk membuat akun portal</p>
+    </div>
+
+    <form wire:submit="register" class="space-y-4">
+        <!-- Nama Lengkap -->
         <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input wire:model="name" id="name" class="block mt-1 w-full" type="text" name="name" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+            <x-input-label for="name" :value="__('Nama Lengkap Siswa')" class="font-medium text-gray-700 text-xs uppercase tracking-wider" />
+            <div class="relative mt-1">
+                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                </div>
+                <x-text-input wire:model="name" id="name" class="block w-full pl-10 py-2.5" type="text" name="name" placeholder="Masukkan nama lengkap" required autofocus autocomplete="name" />
+            </div>
+            <x-input-error :messages="$errors->get('name')" class="mt-1.5" />
         </div>
 
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input wire:model="email" id="email" class="block mt-1 w-full" type="email" name="email" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        <!-- Alamat Email -->
+        <div>
+            <x-input-label for="email" :value="__('Alamat Email Aktif')" class="font-medium text-gray-700 text-xs uppercase tracking-wider" />
+            <div class="relative mt-1">
+                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
+                    </svg>
+                </div>
+                <x-text-input wire:model="email" id="email" class="block w-full pl-10 py-2.5" type="email" name="email" placeholder="nama@sekolah.sch.id" required autocomplete="username" />
+            </div>
+            <x-input-error :messages="$errors->get('email')" class="mt-1.5" />
         </div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input wire:model="password" id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+        <!-- Kata Sandi -->
+        <div>
+            <x-input-label for="password" :value="__('Kata Sandi Baru')" class="font-medium text-gray-700 text-xs uppercase tracking-wider" />
+            <div class="relative mt-1">
+                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                </div>
+                <x-text-input wire:model="password" id="password" class="block w-full pl-10 py-2.5" type="password" name="password" placeholder="Minimal 8 karakter" required autocomplete="new-password" />
+            </div>
+            <x-input-error :messages="$errors->get('password')" class="mt-1.5" />
         </div>
 
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input wire:model="password_confirmation" id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+        <!-- Konfirmasi Kata Sandi -->
+        <div>
+            <x-input-label for="password_confirmation" :value="__('Ulangi Kata Sandi')" class="font-medium text-gray-700 text-xs uppercase tracking-wider" />
+            <div class="relative mt-1">
+                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                </div>
+                <x-text-input wire:model="password_confirmation" id="password_confirmation" class="block w-full pl-10 py-2.5" type="password" name="password_confirmation" placeholder="Ulangi kata sandi di atas" required autocomplete="new-password" />
+            </div>
+            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-1.5" />
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}" wire:navigate>
-                {{ __('Already registered?') }}
-            </a>
-
-            <x-primary-button class="ms-4">
-                {{ __('Register') }}
+        <!-- Tombol Daftar -->
+        <div class="pt-2">
+            <x-primary-button class="w-full py-3 shadow-md shadow-purple-500/20 text-sm">
+                {{ __('Daftar Sekarang') }}
             </x-primary-button>
         </div>
     </form>
+
+    <!-- Sudah Punya Akun -->
+    <div class="mt-6 pt-6 border-t border-gray-100 text-center">
+        <p class="text-xs text-gray-500">
+            Sudah memiliki akun terdaftar?
+            <a href="{{ route('login') }}" wire:navigate class="font-semibold text-purple-700 hover:text-purple-900 hover:underline ms-1">
+                Masuk di Sini
+            </a>
+        </p>
+    </div>
 </div>
