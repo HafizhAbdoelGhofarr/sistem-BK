@@ -26,6 +26,18 @@ Route::view('profile', 'profile')
     ->name('profile');
 
 Route::middleware(['auth', 'verified'])->group(function () {
+    // 0. Modul DIGISELF Proposal (Khusus Murid / Mahasiswa & Bersama)
+    Route::prefix('digiself')->name('digiself.')->group(function () {
+        Volt::route('beranda', 'pages.digiself.beranda')->name('beranda');
+        Volt::route('literasi-digital', 'pages.digiself.literasi')->name('literasi');
+        Volt::route('refleksi', 'pages.digiself.refleksi')->name('refleksi');
+        Volt::route('regulasi-diri', 'pages.digiself.regulasi')->name('regulasi');
+        Volt::route('rencana-aksi', 'pages.digiself.rencana-aksi')->name('rencana-aksi');
+        Volt::route('jurnal-evaluasi', 'pages.digiself.jurnal')->name('jurnal');
+        Volt::route('bantuan-bk', 'pages.digiself.bantuan')->name('bantuan');
+        Volt::route('tentang-privasi', 'pages.digiself.tentang')->name('tentang');
+    });
+
     // 1. Menu Bersama (Dapat diakses oleh Admin, Guru BK, dan Siswa sesuai wewenang masing-masing)
     Volt::route('master/tata-tertib', 'pages.master.tata-tertib')->name('master.tata-tertib');
     Volt::route('pelanggaran', 'pages.pelanggaran.index')->name('pelanggaran.index');

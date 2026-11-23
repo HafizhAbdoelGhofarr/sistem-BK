@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Sistem Informasi Bimbingan Konseling & Tata Tertib Siswa</title>
+        <title>DIGISELF - Media Digital Bimbingan dan Konseling untuk Penguatan Literasi Digital dan Regulasi Mahasiswa</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -67,22 +67,22 @@
 
             <!-- Hero Section -->
             <main class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 flex-1 flex flex-col items-center justify-center text-center">
-                <!-- Badge Akreditasi / Gateway WhatsApp -->
+                <!-- Badge DIGISELF -->
                 <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-100/90 text-purple-800 text-xs font-semibold mb-6 border border-purple-200/80 shadow-xs backdrop-blur-sm">
-                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
-                    <span>Sistem Terintegrasi Sidobe WhatsApp Gateway &bull; Notifikasi Orang Tua Real-Time</span>
+                    <span class="w-2 h-2 rounded-full bg-purple-600 animate-ping"></span>
+                    <span>DIGISELF &bull; Media Digital Bimbingan dan Konseling &bull; Literasi Digital & Regulasi Diri</span>
                 </div>
 
                 <!-- Judul Utama -->
                 <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 tracking-tight max-w-4xl leading-tight">
-                    Membina Kedisiplinan, <br class="hidden sm:inline" />
+                    Penguatan Literasi Digital, <br class="hidden sm:inline" />
                     <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-700 via-purple-600 to-indigo-600">
-                        Membangun Karakter Unggul
+                        Regulasi Diri Mahasiswa & Siswa
                     </span>
                 </h1>
 
                 <p class="mt-5 text-sm sm:text-base text-gray-600 max-w-2xl leading-relaxed">
-                    Portal terpadu layanan Bimbingan Konseling (BK) dan monitoring tata tertib siswa. Menghubungkan Guru BK, Siswa, dan Orang Tua melalui sistem poin transparan dan notifikasi otomatis.
+                    DIGISELF (Digital Self-Development for Students) adalah media digital Bimbingan dan Konseling berbasis psikoedukasi, refleksi kebiasaan digital, penetapan tujuan, dan rencana aksi nyata untuk membangun perilaku digital yang sehat dan terarah.
                 </p>
 
                 <!-- Tombol CTA Interaktif -->
@@ -316,7 +316,7 @@
                         <div class="md:col-span-2 space-y-3">
                             <x-application-logo />
                             <p class="text-xs text-gray-500 leading-relaxed max-w-md">
-                                Sistem Bimbingan Konseling dan Tata Tertib Siswa merupakan instrumen terintegrasi sekolah dalam mewujudkan lingkungan belajar yang aman, kondusif, dan berkarakter budi pekerti luhur.
+                                DIGISELF: Media Digital Bimbingan dan Konseling untuk Penguatan Literasi Digital dan Regulasi Mahasiswa / Siswa. Dikembangkan di Program Studi Bimbingan dan Konseling Pendidikan Islam, Fakultas Tarbiyah dan Keguruan, UIN Raden Intan Lampung.
                             </p>
                         </div>
 
@@ -342,7 +342,7 @@
 
                     <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-400">
                         <div>
-                            &copy; {{ date('Y') }} Sistem Informasi Bimbingan Konseling Sekolah &bull; Hak Cipta Dilindungi Undang-Undang.
+                            &copy; {{ date('Y') }} DIGISELF (Digital Self-Development for Students) &bull; UIN Raden Intan Lampung.
                         </div>
                         <div class="flex items-center gap-4 text-purple-700 font-semibold">
                             <a href="{{ route('login') }}" class="hover:underline">Masuk Portal</a>

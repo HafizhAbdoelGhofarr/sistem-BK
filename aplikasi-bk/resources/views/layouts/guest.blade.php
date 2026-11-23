@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Sistem BK') }} - Portal Bimbingan Konseling & Tata Tertib Siswa</title>
+        <title>{{ config('app.name', 'DIGISELF') }} - Media Digital Bimbingan dan Konseling</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -67,12 +67,12 @@
         <footer class="relative z-10 border-t border-purple-100/80 bg-white/80 backdrop-blur-md py-4 text-center">
             <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-gray-500">
                 <div class="flex items-center gap-2">
-                    <span class="font-bold text-gray-700">Layanan BK & Tata Tertib</span>
+                    <span class="font-bold text-gray-700">DIGISELF</span>
                     <span>&bull;</span>
-                    <span>Membina Disiplin, Membangun Karakter</span>
+                    <span>Penguatan Literasi Digital & Regulasi Diri</span>
                 </div>
                 <div>
-                    &copy; {{ date('Y') }} Sistem Informasi Bimbingan Konseling Sekolah.
+                    &copy; {{ date('Y') }} DIGISELF &bull; UIN Raden Intan Lampung.
                 </div>
             </div>
         </footer>

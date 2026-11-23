@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Sistem BK') }} - Layanan Bimbingan Konseling Sekolah</title>
+        <title>{{ config('app.name', 'DIGISELF') }} - Media Digital Bimbingan dan Konseling</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -120,8 +120,8 @@
 
                     <!-- Mini Footer Simpel Khusus Admin & Guru (Tanpa Footer Besar) -->
                     <footer class="mt-auto py-4 px-6 sm:px-8 lg:px-10 border-t border-purple-100/60 bg-white/40 backdrop-blur-xs text-xs text-gray-400 flex flex-col sm:flex-row items-center justify-between gap-2">
-                        <span>&copy; {{ date('Y') }} Sistem Informasi Bimbingan Konseling Sekolah &bull; Panel Guru & Admin</span>
-                        <span class="text-purple-700 font-semibold">Ruang Konseling Digital</span>
+                        <span>&copy; {{ date('Y') }} DIGISELF &bull; Media Digital Bimbingan dan Konseling &bull; Panel Staff</span>
+                        <span class="text-purple-700 font-semibold">DIGISELF BK</span>
                     </footer>
                 </div>
             </div>
@@ -186,7 +186,7 @@
                             <div class="md:col-span-2 space-y-3">
                                 <x-application-logo />
                                 <p class="text-xs text-gray-500 leading-relaxed max-w-md mt-2">
-                                    Portal Terpadu Bimbingan Konseling dan Pengawasan Tata Tertib Siswa. Menghubungkan Guru BK, Wali Kelas, dan Orang Tua untuk mewujudkan iklim belajar yang tertib, positif, dan berkarakter.
+                                    DIGISELF: Media Digital Bimbingan dan Konseling untuk Penguatan Literasi Digital dan Regulasi Mahasiswa / Siswa. Mendukung pembelajaran mandiri, refleksi diri, dan pendampingan konseling profesional.
                                 </p>
                             </div>
 
@@ -226,12 +226,14 @@
 
                         <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-400">
                             <div>
-                                &copy; {{ date('Y') }} Sistem Informasi Bimbingan Konseling Sekolah &bull; Hak Cipta Dilindungi Undang-Undang.
+                                &copy; {{ date('Y') }} DIGISELF (Digital Self-Development for Students) &bull; UIN Raden Intan Lampung. Hak Cipta Dilindungi.
                             </div>
                             <div class="flex items-center gap-4 text-gray-500 font-medium">
-                                <span class="hover:text-purple-700">Kode Etik Konseling</span>
+                                <a href="{{ route('digiself.tentang') }}" wire:navigate class="hover:text-purple-700">Tentang & Privasi</a>
                                 <span>&bull;</span>
-                                <span class="hover:text-purple-700">Buku Pedoman Tata Tertib</span>
+                                <a href="{{ route('digiself.bantuan') }}" wire:navigate class="hover:text-purple-700">Bantuan BK</a>
+                                <span>&bull;</span>
+                                <a href="{{ route('master.tata-tertib') }}" wire:navigate class="hover:text-purple-700">Tata Tertib</a>
                             </div>
                         </div>
                     </div>
