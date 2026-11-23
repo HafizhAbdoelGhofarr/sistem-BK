@@ -93,121 +93,71 @@
             </div>
         </div>
 
-        <!-- 2. Grid 4 Kartu Statistik Interaktif -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        <!-- 2. Grid 3 Kartu Statistik Utama (Sejajar Satu Baris) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <!-- Kartu 1: Total Pelanggaran -->
-            <div class="bg-white/95 backdrop-blur-md border border-purple-100/90 rounded-2xl p-5 shadow-sm hover:shadow-lg hover:border-purple-300 transition duration-200">
-                <div class="flex items-center justify-between">
-                    <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">Total Pelanggaran</span>
-                    <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center shadow-xs">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                        </svg>
+            <div class="bg-white/95 backdrop-blur-md border border-purple-100/90 rounded-3xl p-6 shadow-sm hover:shadow-lg hover:border-purple-300 transition duration-200 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">Total Pelanggaran</span>
+                        <div class="w-10 h-10 rounded-2xl bg-purple-100 text-purple-700 flex items-center justify-center shadow-xs">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex items-baseline justify-between">
+                        <div class="text-3xl font-extrabold text-gray-900">{{ \App\Models\Pelanggaran::count() }}</div>
+                        <span class="text-[11px] font-semibold text-purple-700 bg-purple-50 px-2.5 py-1 rounded-lg">Snapshot Poin</span>
                     </div>
                 </div>
-                <div class="mt-4 flex items-baseline justify-between">
-                    <div class="text-3xl font-extrabold text-gray-900">{{ \App\Models\Pelanggaran::count() }}</div>
-                    <span class="text-[11px] font-semibold text-purple-700 bg-purple-50 px-2 py-0.5 rounded-md">Snapshot Poin</span>
-                </div>
-                <p class="text-xs text-gray-400 mt-1.5 flex items-center gap-1">
-                    <span class="w-1.5 h-1.5 rounded-full bg-purple-500"></span>
-                    Tercatat dalam sistem sekolah
+                <p class="text-xs text-gray-400 mt-3 pt-3 border-t border-gray-100 flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-purple-500"></span>
+                    Total kasus kedisiplinan tercatat di sekolah
                 </p>
             </div>
 
             <!-- Kartu 2: Siswa Status Kritis -->
-            <div class="bg-white/95 backdrop-blur-md border border-rose-100 rounded-2xl p-5 shadow-sm hover:shadow-lg hover:border-rose-300 transition duration-200">
-                <div class="flex items-center justify-between">
-                    <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">Siswa Kritis</span>
-                    <div class="w-10 h-10 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center shadow-xs">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                        </svg>
+            <div class="bg-white/95 backdrop-blur-md border border-rose-100 rounded-3xl p-6 shadow-sm hover:shadow-lg hover:border-rose-300 transition duration-200 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">Siswa Kritis</span>
+                        <div class="w-10 h-10 rounded-2xl bg-rose-100 text-rose-600 flex items-center justify-center shadow-xs">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex items-baseline justify-between">
+                        <div class="text-3xl font-extrabold text-rose-600">{{ \App\Models\Siswa::where('status_disiplin', 'kritis')->count() }}</div>
+                        <span class="text-[11px] font-semibold text-rose-700 bg-rose-50 px-2.5 py-1 rounded-lg">Poin &ge; 55</span>
                     </div>
                 </div>
-                <div class="mt-4 flex items-baseline justify-between">
-                    <div class="text-3xl font-extrabold text-rose-600">{{ \App\Models\Siswa::where('status_disiplin', 'kritis')->count() }}</div>
-                    <span class="text-[11px] font-semibold text-rose-700 bg-rose-50 px-2 py-0.5 rounded-md">Poin &ge; 55</span>
-                </div>
-                <p class="text-xs text-rose-500/80 mt-1.5 flex items-center gap-1">
-                    <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
-                    Perlu panggilan resmi ortu
+                <p class="text-xs text-rose-500/80 mt-3 pt-3 border-t border-rose-50 flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-rose-500"></span>
+                    Prioritas panggilan orang tua/wali murid
                 </p>
             </div>
 
             <!-- Kartu 3: Sesi Pembinaan Aktif -->
-            <div class="bg-white/95 backdrop-blur-md border border-amber-100 rounded-2xl p-5 shadow-sm hover:shadow-lg hover:border-amber-300 transition duration-200">
-                <div class="flex items-center justify-between">
-                    <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">Sesi Pembinaan</span>
-                    <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center shadow-xs">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                        </svg>
+            <div class="bg-white/95 backdrop-blur-md border border-amber-100 rounded-3xl p-6 shadow-sm hover:shadow-lg hover:border-amber-300 transition duration-200 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">Sesi Pembinaan</span>
+                        <div class="w-10 h-10 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center shadow-xs">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex items-baseline justify-between">
+                        <div class="text-3xl font-extrabold text-gray-900">{{ \App\Models\Pembinaan::where('status', '!=', 'selesai')->count() }}</div>
+                        <span class="text-[11px] font-semibold text-amber-800 bg-amber-50 px-2.5 py-1 rounded-lg">Kasus Aktif</span>
                     </div>
                 </div>
-                <div class="mt-4 flex items-baseline justify-between">
-                    <div class="text-3xl font-extrabold text-gray-900">{{ \App\Models\Pembinaan::where('status', '!=', 'selesai')->count() }}</div>
-                    <span class="text-[11px] font-semibold text-amber-800 bg-amber-50 px-2 py-0.5 rounded-md">Kasus Aktif</span>
-                </div>
-                <p class="text-xs text-gray-400 mt-1.5 flex items-center gap-1">
-                    <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
-                    Pendampingan konselor BK
-                </p>
-            </div>
-
-            <!-- Kartu 4: Notifikasi WhatsApp Sidobe -->
-            <div class="bg-white/95 backdrop-blur-md border border-emerald-100 rounded-2xl p-5 shadow-sm hover:shadow-lg hover:border-emerald-300 transition duration-200">
-                <div class="flex items-center justify-between">
-                    <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">Gateway Sidobe</span>
-                    <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center shadow-xs">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                        </svg>
-                    </div>
-                </div>
-                <div class="mt-4 flex items-baseline justify-between">
-                    <div class="text-2xl font-extrabold text-emerald-600">{{ \App\Models\NotifikasiWa::count() }} Pesan</div>
-                    <span class="text-[11px] font-semibold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-md">Queue Driver</span>
-                </div>
-                <p class="text-xs text-emerald-700/80 mt-1.5 flex items-center gap-1">
-                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                    Otomatis terkirim ke no. ortu
-                </p>
-            </div>
-                    <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">Sesi Pembinaan</span>
-                    <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center shadow-xs">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                        </svg>
-                    </div>
-                </div>
-                <div class="mt-4 flex items-baseline justify-between">
-                    <div class="text-3xl font-extrabold text-gray-900">0</div>
-                    <span class="text-[11px] font-semibold text-amber-800 bg-amber-50 px-2 py-0.5 rounded-md">Kasus Aktif</span>
-                </div>
-                <p class="text-xs text-gray-400 mt-1.5 flex items-center gap-1">
-                    <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
-                    Pendampingan konselor BK
-                </p>
-            </div>
-
-            <!-- Kartu 4: Notifikasi WhatsApp Sidobe -->
-            <div class="bg-white/95 backdrop-blur-md border border-emerald-100 rounded-2xl p-5 shadow-sm hover:shadow-lg hover:border-emerald-300 transition duration-200">
-                <div class="flex items-center justify-between">
-                    <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">Gateway Sidobe</span>
-                    <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center shadow-xs">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                        </svg>
-                    </div>
-                </div>
-                <div class="mt-4 flex items-baseline justify-between">
-                    <div class="text-2xl font-extrabold text-emerald-600">Siap Kirim</div>
-                    <span class="text-[11px] font-semibold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-md">Queue Driver</span>
-                </div>
-                <p class="text-xs text-emerald-700/80 mt-1.5 flex items-center gap-1">
-                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                    Otomatis terkirim ke no. ortu
+                <p class="text-xs text-gray-400 mt-3 pt-3 border-t border-gray-100 flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                    Dalam pendampingan konseling Guru BK
                 </p>
             </div>
         </div>
@@ -224,7 +174,7 @@
                     
                     <!-- Filter Tombol Tab Interaktif -->
                     <div class="inline-flex p-1 bg-purple-50/70 rounded-xl border border-purple-100 text-xs">
-                        <button @click="filterStatus = 'semua'" :class="filterStatus === 'semua' ? 'bg-white font-bold text-purple-800 shadow-xs' : 'text-gray-500 hover:text-purple-700'" class="px-2.5 py-1 rounded-lg transition">Semua</button>
+                        <button @click="filterStatus = 'semua'" :class="(!filterStatus || filterStatus === 'semua') ? 'bg-white font-bold text-purple-800 shadow-xs' : 'text-gray-500 hover:text-purple-700'" class="px-2.5 py-1 rounded-lg transition">Semua</button>
                         <button @click="filterStatus = 'aman'" :class="filterStatus === 'aman' ? 'bg-emerald-600 text-white font-bold shadow-xs' : 'text-gray-500 hover:text-emerald-700'" class="px-2.5 py-1 rounded-lg transition">Aman</button>
                         <button @click="filterStatus = 'perhatian'" :class="filterStatus === 'perhatian' ? 'bg-amber-500 text-white font-bold shadow-xs' : 'text-gray-500 hover:text-amber-700'" class="px-2.5 py-1 rounded-lg transition">Perhatian</button>
                         <button @click="filterStatus = 'pembinaan'" :class="filterStatus === 'pembinaan' ? 'bg-orange-500 text-white font-bold shadow-xs' : 'text-gray-500 hover:text-orange-700'" class="px-2.5 py-1 rounded-lg transition">Pembinaan</button>
@@ -234,7 +184,7 @@
 
                 <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <!-- Status 1: Aman -->
-                    <div x-show="filterStatus === 'semua' || filterStatus === 'aman'" x-transition class="p-4 rounded-2xl border border-emerald-100 bg-emerald-50/40 hover:bg-emerald-50/70 transition">
+                    <div x-show="!filterStatus || filterStatus === 'semua' || filterStatus === 'aman'" x-transition class="p-4 rounded-2xl border border-emerald-100 bg-emerald-50/40 hover:bg-emerald-50/70 transition">
                         <div class="flex items-center justify-between mb-2">
                             <x-status-badge status="aman" />
                             <span class="text-xs font-bold text-emerald-800 bg-emerald-100/80 px-2 py-0.5 rounded-md">0 - 24 Poin</span>
@@ -246,7 +196,7 @@
                     </div>
 
                     <!-- Status 2: Perhatian -->
-                    <div x-show="filterStatus === 'semua' || filterStatus === 'perhatian'" x-transition class="p-4 rounded-2xl border border-amber-100 bg-amber-50/40 hover:bg-amber-50/70 transition">
+                    <div x-show="!filterStatus || filterStatus === 'semua' || filterStatus === 'perhatian'" x-transition class="p-4 rounded-2xl border border-amber-100 bg-amber-50/40 hover:bg-amber-50/70 transition">
                         <div class="flex items-center justify-between mb-2">
                             <x-status-badge status="perhatian" />
                             <span class="text-xs font-bold text-amber-800 bg-amber-100/80 px-2 py-0.5 rounded-md">25 - 39 Poin</span>
@@ -258,7 +208,7 @@
                     </div>
 
                     <!-- Status 3: Pembinaan -->
-                    <div x-show="filterStatus === 'semua' || filterStatus === 'pembinaan'" x-transition class="p-4 rounded-2xl border border-orange-100 bg-orange-50/40 hover:bg-orange-50/70 transition">
+                    <div x-show="!filterStatus || filterStatus === 'semua' || filterStatus === 'pembinaan'" x-transition class="p-4 rounded-2xl border border-orange-100 bg-orange-50/40 hover:bg-orange-50/70 transition">
                         <div class="flex items-center justify-between mb-2">
                             <x-status-badge status="pembinaan" />
                             <span class="text-xs font-bold text-orange-800 bg-orange-100/80 px-2 py-0.5 rounded-md">40 - 54 Poin</span>
@@ -270,7 +220,7 @@
                     </div>
 
                     <!-- Status 4: Kritis -->
-                    <div x-show="filterStatus === 'semua' || filterStatus === 'kritis'" x-transition class="p-4 rounded-2xl border border-rose-100 bg-rose-50/40 hover:bg-rose-50/70 transition">
+                    <div x-show="!filterStatus || filterStatus === 'semua' || filterStatus === 'kritis'" x-transition class="p-4 rounded-2xl border border-rose-100 bg-rose-50/40 hover:bg-rose-50/70 transition">
                         <div class="flex items-center justify-between mb-2">
                             <x-status-badge status="kritis" />
                             <span class="text-xs font-bold text-rose-800 bg-rose-100/80 px-2 py-0.5 rounded-md">&ge; 55 Poin</span>
@@ -328,8 +278,8 @@
                 </div>
 
                 <div class="mt-6 pt-4 border-t border-gray-100 flex items-center justify-between text-[11px] text-gray-400">
-                    <span>Sistem BK &bull; v1.0</span>
-                    <span class="text-purple-700 font-semibold">Tugas Akhir Farrel & Hafiz</span>
+                    <span>Sistem BK Terpadu</span>
+                    <span class="text-purple-700 font-semibold">Layanan Bimbingan Konseling Digital</span>
                 </div>
             </div>
         </div>

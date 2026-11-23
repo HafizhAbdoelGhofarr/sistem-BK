@@ -342,7 +342,7 @@
 
                     <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-400">
                         <div>
-                            &copy; {{ date('Y') }} Sistem Informasi Bimbingan Konseling Sekolah &bull; Dikembangkan oleh Farrel (Frontend) & Hafiz (Backend).
+                            &copy; {{ date('Y') }} Sistem Informasi Bimbingan Konseling Sekolah &bull; Hak Cipta Dilindungi Undang-Undang.
                         </div>
                         <div class="flex items-center gap-4 text-purple-700 font-semibold">
                             <a href="{{ route('login') }}" class="hover:underline">Masuk Portal</a>

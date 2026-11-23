@@ -98,13 +98,7 @@ new class extends Component
             </div>
 
             <!-- Settings & Profile Dropdown -->
-            <div class="hidden sm:flex sm:items-center sm:ms-6 gap-3">
-                <!-- Indikator Gateway WA -->
-                <div class="hidden lg:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200/80 text-[11px] font-semibold text-emerald-700">
-                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                    Sidobe WA Aktif
-                </div>
-
+            <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <!-- Dropdown User -->
                 <x-dropdown align="right" width="56">
                     <x-slot name="trigger">
