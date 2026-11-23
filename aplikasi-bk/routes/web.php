@@ -29,6 +29,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Volt::route('pelanggaran', 'pages.pelanggaran.index')->name('pelanggaran.index');
     Volt::route('pelanggaran/create', 'pages.pelanggaran.create')->name('pelanggaran.create');
     Volt::route('notifikasi-wa', 'pages.notifikasi-wa.index')->name('notifikasi-wa.index');
+    Volt::route('pembinaan', 'pages.pembinaan.index')->name('pembinaan.index');
+    Volt::route('pembinaan/create', 'pages.pembinaan.create')->name('pembinaan.create');
+    Volt::route('master/siswa', 'pages.master.siswa')->name('master.siswa');
 });
 
 Route::middleware('auth')->prefix('bk')->name('bk.')->group(function () {
