@@ -23,21 +23,24 @@ new class extends Component
     }
 }; ?>
 
-<section class="space-y-6">
-    <header>
-        <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Delete Account') }}
+<section class="space-y-6 text-center">
+    <header class="pb-4 border-b border-rose-100">
+        <h2 class="text-base font-extrabold text-rose-700">
+            {{ __('Hapus Akun Pengguna') }}
         </h2>
 
-        <p class="mt-1 text-sm text-gray-600">
-            {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.') }}
+        <p class="mt-1 text-xs text-gray-500 max-w-md mx-auto">
+            {{ __('Tindakan ini bersifat permanen. Seluruh data autentikasi dan histori login akun Anda akan dihapus dari sistem.') }}
         </p>
     </header>
 
-    <x-danger-button
-        x-data=""
-        x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')"
-    >{{ __('Delete Account') }}</x-danger-button>
+    <div class="flex justify-center">
+        <x-danger-button
+            x-data=""
+            x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')"
+            class="py-2.5 px-6 text-xs font-bold"
+        >{{ __('Hapus Akun Ini') }}</x-danger-button>
+    </div>
 
     <x-modal name="confirm-user-deletion" :show="$errors->isNotEmpty()" focusable>
         <form wire:submit="deleteUser" class="p-6">
