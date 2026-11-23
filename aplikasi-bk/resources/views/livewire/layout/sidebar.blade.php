@@ -38,7 +38,7 @@ new class extends Component
             </div>
         </div>
 
-        <!-- 3. Daftar Navigasi Menu Vertikal -->
+        <!-- 3. Daftar Navigasi Menu Vertikal Berdasarkan Role -->
         <nav class="px-3 py-2 space-y-1 text-xs font-semibold">
             <div class="px-3 pt-2 pb-1.5 text-[10px] font-extrabold uppercase tracking-wider text-gray-400">
                 Menu Utama
@@ -53,7 +53,7 @@ new class extends Component
                 <span>Dashboard</span>
             </a>
 
-            <!-- Pelanggaran -->
+            <!-- Pelanggaran Siswa -->
             <a href="{{ route('pelanggaran.index') }}" wire:navigate
                class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition duration-150 {{ request()->routeIs('pelanggaran.index') ? 'bg-gradient-to-r from-purple-700 to-purple-600 text-white font-bold shadow-md shadow-purple-600/20' : 'text-gray-600 hover:text-purple-700 hover:bg-purple-50/70' }}">
                 <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -62,60 +62,77 @@ new class extends Component
                 <span>Pelanggaran Siswa</span>
             </a>
 
-            <!-- Pembinaan BK -->
-            <a href="{{ route('pembinaan.index') }}" wire:navigate
-               class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition duration-150 {{ request()->routeIs('pembinaan.index') ? 'bg-gradient-to-r from-purple-700 to-purple-600 text-white font-bold shadow-md shadow-purple-600/20' : 'text-gray-600 hover:text-purple-700 hover:bg-purple-50/70' }}">
-                <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                </svg>
-                <span>Pembinaan BK</span>
-            </a>
+            @if(auth()->user()->hasRole('guru_bk'))
+                <!-- Pembinaan BK (Khusus Guru BK) -->
+                <a href="{{ route('pembinaan.index') }}" wire:navigate
+                   class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition duration-150 {{ request()->routeIs('pembinaan.index') ? 'bg-gradient-to-r from-purple-700 to-purple-600 text-white font-bold shadow-md shadow-purple-600/20' : 'text-gray-600 hover:text-purple-700 hover:bg-purple-50/70' }}">
+                    <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                    <span>Pembinaan BK</span>
+                </a>
 
-            <div class="px-3 pt-4 pb-1.5 text-[10px] font-extrabold uppercase tracking-wider text-gray-400">
-                Operasional
-            </div>
+                <div class="px-3 pt-4 pb-1.5 text-[10px] font-extrabold uppercase tracking-wider text-gray-400">
+                    Tindakan & Konseling
+                </div>
 
-            <!-- Catat Kasus Baru -->
-            <a href="{{ route('pelanggaran.create') }}" wire:navigate
-               class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition duration-150 {{ request()->routeIs('pelanggaran.create') ? 'bg-gradient-to-r from-purple-700 to-purple-600 text-white font-bold shadow-md shadow-purple-600/20' : 'text-purple-700 bg-purple-50/80 hover:bg-purple-100 font-bold' }}">
-                <svg class="w-4 h-4 flex-shrink-0 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                </svg>
-                <span>Catat Pelanggaran</span>
-            </a>
+                <!-- Catat Kasus Baru (Guru BK) -->
+                <a href="{{ route('pelanggaran.create') }}" wire:navigate
+                   class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition duration-150 {{ request()->routeIs('pelanggaran.create') ? 'bg-gradient-to-r from-purple-700 to-purple-600 text-white font-bold shadow-md shadow-purple-600/20' : 'text-purple-700 bg-purple-50/80 hover:bg-purple-100 font-bold' }}">
+                    <svg class="w-4 h-4 flex-shrink-0 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                    </svg>
+                    <span>Catat Pelanggaran</span>
+                </a>
 
-            <!-- Data Siswa -->
-            <a href="{{ route('master.siswa') }}" wire:navigate
-               class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition duration-150 {{ request()->routeIs('master.siswa') ? 'bg-gradient-to-r from-purple-700 to-purple-600 text-white font-bold shadow-md shadow-purple-600/20' : 'text-gray-600 hover:text-purple-700 hover:bg-purple-50/70' }}">
-                <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
-                <span>Data Siswa</span>
-            </a>
+                <!-- Buka Sesi Konseling Baru (Guru BK) -->
+                <a href="{{ route('pembinaan.create') }}" wire:navigate
+                   class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition duration-150 {{ request()->routeIs('pembinaan.create') ? 'bg-gradient-to-r from-purple-700 to-purple-600 text-white font-bold shadow-md shadow-purple-600/20' : 'text-gray-600 hover:text-purple-700 hover:bg-purple-50/70' }}">
+                    <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                    <span>Sesi Konseling Baru</span>
+                </a>
+            @endif
 
-            <!-- Log WhatsApp -->
-            <a href="{{ route('notifikasi-wa.index') }}" wire:navigate
-               class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition duration-150 {{ request()->routeIs('notifikasi-wa.index') ? 'bg-gradient-to-r from-purple-700 to-purple-600 text-white font-bold shadow-md shadow-purple-600/20' : 'text-gray-600 hover:text-purple-700 hover:bg-purple-50/70' }}">
-                <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                </svg>
-                <span>Log WhatsApp</span>
-            </a>
+            @if(auth()->user()->hasRole('admin'))
+                <div class="px-3 pt-4 pb-1.5 text-[10px] font-extrabold uppercase tracking-wider text-gray-400">
+                    Administrasi & Sistem
+                </div>
 
-            <!-- Laporan -->
-            <a href="{{ route('laporan.index') }}" wire:navigate
-               class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition duration-150 {{ request()->routeIs('laporan.index') ? 'bg-gradient-to-r from-purple-700 to-purple-600 text-white font-bold shadow-md shadow-purple-600/20' : 'text-gray-600 hover:text-purple-700 hover:bg-purple-50/70' }}">
-                <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-                <span>Laporan Rekapitulasi</span>
-            </a>
+                <!-- Data Siswa (Khusus Admin) -->
+                <a href="{{ route('master.siswa') }}" wire:navigate
+                   class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition duration-150 {{ request()->routeIs('master.siswa') ? 'bg-gradient-to-r from-purple-700 to-purple-600 text-white font-bold shadow-md shadow-purple-600/20' : 'text-gray-600 hover:text-purple-700 hover:bg-purple-50/70' }}">
+                    <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                    <span>Data Siswa</span>
+                </a>
+
+                <!-- Log WhatsApp Sidobe (Khusus Admin) -->
+                <a href="{{ route('notifikasi-wa.index') }}" wire:navigate
+                   class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition duration-150 {{ request()->routeIs('notifikasi-wa.index') ? 'bg-gradient-to-r from-purple-700 to-purple-600 text-white font-bold shadow-md shadow-purple-600/20' : 'text-gray-600 hover:text-purple-700 hover:bg-purple-50/70' }}">
+                    <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                    </svg>
+                    <span>Log WhatsApp</span>
+                </a>
+
+                <!-- Laporan Rekapitulasi (Khusus Admin) -->
+                <a href="{{ route('laporan.index') }}" wire:navigate
+                   class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition duration-150 {{ request()->routeIs('laporan.index') ? 'bg-gradient-to-r from-purple-700 to-purple-600 text-white font-bold shadow-md shadow-purple-600/20' : 'text-gray-600 hover:text-purple-700 hover:bg-purple-50/70' }}">
+                    <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    <span>Laporan Rekapitulasi</span>
+                </a>
+            @endif
 
             <div class="px-3 pt-4 pb-1.5 text-[10px] font-extrabold uppercase tracking-wider text-gray-400">
                 Pedoman
             </div>
 
-            <!-- Tata Tertib -->
+            <!-- Tata Tertib (Bisa Diakses Admin & Guru BK) -->
             <a href="{{ route('master.tata-tertib') }}" wire:navigate
                class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition duration-150 {{ request()->routeIs('master.tata-tertib') ? 'bg-gradient-to-r from-purple-700 to-purple-600 text-white font-bold shadow-md shadow-purple-600/20' : 'text-gray-600 hover:text-purple-700 hover:bg-purple-50/70' }}">
                 <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">

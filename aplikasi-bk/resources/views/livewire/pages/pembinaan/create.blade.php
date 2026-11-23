@@ -19,6 +19,10 @@ new #[Layout('layouts.app')] class extends Component
 
     public function mount(): void
     {
+        if (! auth()->user()->hasRole('guru_bk')) {
+            abort(403, 'Akses ditolak: Hanya Guru BK yang memiliki wewenang menyelenggarakan dan mencatat sesi bimbingan konseling.');
+        }
+
         $this->tanggal = date('Y-m-d');
         if (request()->has('siswa_id')) {
             $this->siswa_id = (int) request('siswa_id');

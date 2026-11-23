@@ -17,6 +17,10 @@ new #[Layout('layouts.app')] class extends Component
 
     public function mount(): void
     {
+        if (auth()->user()->hasRole('siswa')) {
+            abort(403, 'Akses ditolak: Siswa tidak memiliki izin untuk mencatat pelanggaran.');
+        }
+
         $this->tanggal = date('Y-m-d');
         $firstKelas = Kelas::first();
         if ($firstKelas) {

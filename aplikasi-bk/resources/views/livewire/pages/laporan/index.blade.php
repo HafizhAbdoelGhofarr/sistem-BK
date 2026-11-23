@@ -15,6 +15,10 @@ new #[Layout('layouts.app')] class extends Component
 
     public function mount(): void
     {
+        if (! auth()->user()->hasRole('admin')) {
+            abort(403, 'Akses ditolak: Hanya Administrator yang berwenang mengakses laporan rekapitulasi kedisiplinan dan ekspor dokumen.');
+        }
+
         $this->tanggal_mulai = date('Y-m-01'); // Awal bulan ini
         $this->tanggal_selesai = date('Y-m-d'); // Hari ini
     }

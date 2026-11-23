@@ -26,14 +26,27 @@ Route::view('profile', 'profile')
     ->name('profile');
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Volt::route('pelanggaran', 'pages.pelanggaran.index')->name('pelanggaran.index');
-    Volt::route('pelanggaran/create', 'pages.pelanggaran.create')->name('pelanggaran.create');
-    Volt::route('notifikasi-wa', 'pages.notifikasi-wa.index')->name('notifikasi-wa.index');
-    Volt::route('pembinaan', 'pages.pembinaan.index')->name('pembinaan.index');
-    Volt::route('pembinaan/create', 'pages.pembinaan.create')->name('pembinaan.create');
-    Volt::route('master/siswa', 'pages.master.siswa')->name('master.siswa');
+    // 1. Menu Bersama (Dapat diakses oleh Admin, Guru BK, dan Siswa sesuai wewenang masing-masing)
     Volt::route('master/tata-tertib', 'pages.master.tata-tertib')->name('master.tata-tertib');
-    Volt::route('laporan', 'pages.laporan.index')->name('laporan.index');
+    Volt::route('pelanggaran', 'pages.pelanggaran.index')->name('pelanggaran.index');
+    Volt::route('pembinaan', 'pages.pembinaan.index')->name('pembinaan.index');
+
+    // 2. Operasional Pelanggaran (Khusus Guru BK & Admin, Siswa Dilarang / 403 Forbidden)
+    Route::middleware('role:guru_bk|admin')->group(function () {
+        Volt::route('pelanggaran/create', 'pages.pelanggaran.create')->name('pelanggaran.create');
+    });
+
+    // 3. Sesi Konseling & Pembinaan (Khusus Guru BK, Admin & Siswa Dilarang / 403 Forbidden)
+    Route::middleware('role:guru_bk')->group(function () {
+        Volt::route('pembinaan/create', 'pages.pembinaan.create')->name('pembinaan.create');
+    });
+
+    // 4. Panel Manajemen Sistem & Master Data (Khusus Administrator, Guru BK & Siswa Dilarang / 403 Forbidden)
+    Route::middleware('role:admin')->group(function () {
+        Volt::route('notifikasi-wa', 'pages.notifikasi-wa.index')->name('notifikasi-wa.index');
+        Volt::route('master/siswa', 'pages.master.siswa')->name('master.siswa');
+        Volt::route('laporan', 'pages.laporan.index')->name('laporan.index');
+    });
 });
 
 Route::middleware('auth')->prefix('bk')->name('bk.')->group(function () {

@@ -12,6 +12,13 @@ new #[Layout('layouts.app')] class extends Component
 
     public string $statusFilter = '';
 
+    public function mount(): void
+    {
+        if (! auth()->user()->hasRole('admin')) {
+            abort(403, 'Akses ditolak: Hanya Administrator yang berwenang mengakses dan memantau log WhatsApp Sidobe.');
+        }
+    }
+
     public function kirimUlang(int $id, WhatsAppService $service): void
     {
         $notif = NotifikasiWa::with('siswa')->findOrFail($id);

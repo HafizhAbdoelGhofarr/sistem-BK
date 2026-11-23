@@ -57,20 +57,45 @@
                     Sistem ini terintegrasi penuh dengan <strong>WhatsApp API Sidobe</strong>. Setiap pencatatan pelanggaran siswa akan secara otomatis memicu pengiriman pesan pemberitahuan ke nomor WhatsApp orang tua/wali murid tanpa jeda.
                 </p>
 
-                <!-- Tombol Aksi Cepat di Banner -->
+                <!-- Tombol Aksi Cepat di Banner Berdasarkan Role -->
                 <div class="mt-6 flex flex-wrap items-center gap-3">
-                    @role('admin|guru_bk')
+                    @if (auth()->user()->hasRole('guru_bk'))
                         <a href="{{ route('pelanggaran.create') }}" wire:navigate class="inline-flex items-center gap-2 px-4 py-2.5 bg-white text-purple-900 hover:bg-purple-50 text-xs font-bold rounded-xl shadow-md transition transform hover:-translate-y-0.5">
                             <svg class="w-4 h-4 text-purple-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                             </svg>
                             Input Pelanggaran Baru
                         </a>
+                        <a href="{{ route('pembinaan.create') }}" wire:navigate class="inline-flex items-center gap-2 px-4 py-2.5 bg-white/20 hover:bg-white/30 text-white border border-white/25 text-xs font-bold rounded-xl backdrop-blur-sm transition">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                            </svg>
+                            Buka Sesi Konseling
+                        </a>
                         <a href="{{ route('pelanggaran.index') }}" wire:navigate class="inline-flex items-center gap-2 px-4 py-2.5 bg-white/15 hover:bg-white/25 text-white border border-white/20 text-xs font-bold rounded-xl backdrop-blur-sm transition">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                             </svg>
-                            Data Pelanggaran Siswa
+                            Data Pelanggaran
+                        </a>
+                    @elseif (auth()->user()->hasRole('admin'))
+                        <a href="{{ route('master.siswa') }}" wire:navigate class="inline-flex items-center gap-2 px-4 py-2.5 bg-white text-purple-900 hover:bg-purple-50 text-xs font-bold rounded-xl shadow-md transition transform hover:-translate-y-0.5">
+                            <svg class="w-4 h-4 text-purple-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                            </svg>
+                            Kelola Data Siswa
+                        </a>
+                        <a href="{{ route('notifikasi-wa.index') }}" wire:navigate class="inline-flex items-center gap-2 px-4 py-2.5 bg-white/20 hover:bg-white/30 text-white border border-white/25 text-xs font-bold rounded-xl backdrop-blur-sm transition">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                            </svg>
+                            Monitoring Log WA
+                        </a>
+                        <a href="{{ route('laporan.index') }}" wire:navigate class="inline-flex items-center gap-2 px-4 py-2.5 bg-white/15 hover:bg-white/25 text-white border border-white/20 text-xs font-bold rounded-xl backdrop-blur-sm transition">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>
+                            Laporan Rekap
                         </a>
                     @else
                         <a href="{{ route('pelanggaran.index') }}" wire:navigate class="inline-flex items-center gap-2 px-4 py-2.5 bg-white text-purple-900 hover:bg-purple-50 text-xs font-bold rounded-xl shadow-md transition">
@@ -79,7 +104,13 @@
                             </svg>
                             Lihat Catatan Poin Saya
                         </a>
-                    @endrole
+                        <a href="{{ route('pembinaan.index') }}" wire:navigate class="inline-flex items-center gap-2 px-4 py-2.5 bg-white/15 hover:bg-white/25 text-white border border-white/20 text-xs font-bold rounded-xl backdrop-blur-sm transition">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                            </svg>
+                            Sesi Pembinaan Saya
+                        </a>
+                    @endif
                 </div>
             </div>
 
@@ -93,73 +124,208 @@
             </div>
         </div>
 
-        <!-- 2. Grid 3 Kartu Statistik Utama (Sejajar Satu Baris) -->
+        <!-- 2. Grid 3 Kartu Statistik Utama Berdasarkan Role -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <!-- Kartu 1: Total Pelanggaran -->
-            <div class="bg-white/95 backdrop-blur-md border border-purple-100/90 rounded-3xl p-6 shadow-sm hover:shadow-lg hover:border-purple-300 transition duration-200 flex flex-col justify-between">
-                <div>
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">Total Pelanggaran</span>
-                        <div class="w-10 h-10 rounded-2xl bg-purple-100 text-purple-700 flex items-center justify-center shadow-xs">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                            </svg>
+            @if (auth()->user()->hasRole('siswa'))
+                <!-- Kartu 1: Pelanggaran Siswa -->
+                <div class="bg-white/95 backdrop-blur-md border border-purple-100/90 rounded-3xl p-6 shadow-sm hover:shadow-lg hover:border-purple-300 transition duration-200 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">Catatan Pelanggaran Saya</span>
+                            <div class="w-10 h-10 rounded-2xl bg-purple-100 text-purple-700 flex items-center justify-center shadow-xs">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex items-baseline justify-between">
+                            <div class="text-3xl font-extrabold text-gray-900">{{ auth()->user()->siswa ? auth()->user()->siswa->pelanggaran()->count() : 0 }}</div>
+                            <span class="text-[11px] font-semibold text-purple-700 bg-purple-50 px-2.5 py-1 rounded-lg">Kasus Saya</span>
                         </div>
                     </div>
-                    <div class="mt-4 flex items-baseline justify-between">
-                        <div class="text-3xl font-extrabold text-gray-900">{{ \App\Models\Pelanggaran::count() }}</div>
-                        <span class="text-[11px] font-semibold text-purple-700 bg-purple-50 px-2.5 py-1 rounded-lg">Snapshot Poin</span>
-                    </div>
+                    <p class="text-xs text-gray-400 mt-3 pt-3 border-t border-gray-100 flex items-center gap-1.5">
+                        <span class="w-2 h-2 rounded-full bg-purple-500"></span>
+                        Riwayat catatan pelanggaran pribadi Anda
+                    </p>
                 </div>
-                <p class="text-xs text-gray-400 mt-3 pt-3 border-t border-gray-100 flex items-center gap-1.5">
-                    <span class="w-2 h-2 rounded-full bg-purple-500"></span>
-                    Total kasus kedisiplinan tercatat di sekolah
-                </p>
-            </div>
 
-            <!-- Kartu 2: Siswa Status Kritis -->
-            <div class="bg-white/95 backdrop-blur-md border border-rose-100 rounded-3xl p-6 shadow-sm hover:shadow-lg hover:border-rose-300 transition duration-200 flex flex-col justify-between">
-                <div>
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">Siswa Kritis</span>
-                        <div class="w-10 h-10 rounded-2xl bg-rose-100 text-rose-600 flex items-center justify-center shadow-xs">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                            </svg>
+                <!-- Kartu 2: Akumulasi Poin Anda -->
+                <div class="bg-white/95 backdrop-blur-md border border-rose-100 rounded-3xl p-6 shadow-sm hover:shadow-lg hover:border-rose-300 transition duration-200 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">Total Poin Kedisiplinan</span>
+                            <div class="w-10 h-10 rounded-2xl bg-rose-100 text-rose-600 flex items-center justify-center shadow-xs">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex items-baseline justify-between">
+                            <div class="text-3xl font-extrabold text-rose-600">{{ auth()->user()->siswa ? auth()->user()->siswa->total_poin : 0 }}</div>
+                            <span class="text-[11px] font-semibold text-rose-700 bg-rose-50 px-2.5 py-1 rounded-lg">Status: {{ ucfirst(auth()->user()->siswa?->status_disiplin ?? 'Aman') }}</span>
                         </div>
                     </div>
-                    <div class="mt-4 flex items-baseline justify-between">
-                        <div class="text-3xl font-extrabold text-rose-600">{{ \App\Models\Siswa::where('status_disiplin', 'kritis')->count() }}</div>
-                        <span class="text-[11px] font-semibold text-rose-700 bg-rose-50 px-2.5 py-1 rounded-lg">Poin &ge; 55</span>
-                    </div>
+                    <p class="text-xs text-rose-500/80 mt-3 pt-3 border-t border-rose-50 flex items-center gap-1.5">
+                        <span class="w-2 h-2 rounded-full bg-rose-500"></span>
+                        Akumulasi poin sanksi kedisiplinan Anda
+                    </p>
                 </div>
-                <p class="text-xs text-rose-500/80 mt-3 pt-3 border-t border-rose-50 flex items-center gap-1.5">
-                    <span class="w-2 h-2 rounded-full bg-rose-500"></span>
-                    Prioritas panggilan orang tua/wali murid
-                </p>
-            </div>
 
-            <!-- Kartu 3: Sesi Pembinaan Aktif -->
-            <div class="bg-white/95 backdrop-blur-md border border-amber-100 rounded-3xl p-6 shadow-sm hover:shadow-lg hover:border-amber-300 transition duration-200 flex flex-col justify-between">
-                <div>
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">Sesi Pembinaan</span>
-                        <div class="w-10 h-10 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center shadow-xs">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                            </svg>
+                <!-- Kartu 3: Sesi Pembinaan Saya -->
+                <div class="bg-white/95 backdrop-blur-md border border-amber-100 rounded-3xl p-6 shadow-sm hover:shadow-lg hover:border-amber-300 transition duration-200 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">Sesi Pembinaan Saya</span>
+                            <div class="w-10 h-10 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center shadow-xs">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex items-baseline justify-between">
+                            <div class="text-3xl font-extrabold text-gray-900">{{ auth()->user()->siswa ? auth()->user()->siswa->pembinaan()->count() : 0 }}</div>
+                            <span class="text-[11px] font-semibold text-amber-800 bg-amber-50 px-2.5 py-1 rounded-lg">Konseling Saya</span>
                         </div>
                     </div>
-                    <div class="mt-4 flex items-baseline justify-between">
-                        <div class="text-3xl font-extrabold text-gray-900">{{ \App\Models\Pembinaan::where('status', '!=', 'selesai')->count() }}</div>
-                        <span class="text-[11px] font-semibold text-amber-800 bg-amber-50 px-2.5 py-1 rounded-lg">Kasus Aktif</span>
-                    </div>
+                    <p class="text-xs text-gray-400 mt-3 pt-3 border-t border-gray-100 flex items-center gap-1.5">
+                        <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                        Jadwal dan sesi bimbingan bersama Guru BK
+                    </p>
                 </div>
-                <p class="text-xs text-gray-400 mt-3 pt-3 border-t border-gray-100 flex items-center gap-1.5">
-                    <span class="w-2 h-2 rounded-full bg-amber-500"></span>
-                    Dalam pendampingan konseling Guru BK
-                </p>
-            </div>
+            @elseif (auth()->user()->hasRole('admin'))
+                <!-- Kartu 1: Total Pelanggaran Sekolah -->
+                <div class="bg-white/95 backdrop-blur-md border border-purple-100/90 rounded-3xl p-6 shadow-sm hover:shadow-lg hover:border-purple-300 transition duration-200 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">Total Pelanggaran Sekolah</span>
+                            <div class="w-10 h-10 rounded-2xl bg-purple-100 text-purple-700 flex items-center justify-center shadow-xs">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex items-baseline justify-between">
+                            <div class="text-3xl font-extrabold text-gray-900">{{ \App\Models\Pelanggaran::count() }}</div>
+                            <span class="text-[11px] font-semibold text-purple-700 bg-purple-50 px-2.5 py-1 rounded-lg">Database Sekolah</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-3 pt-3 border-t border-gray-100 flex items-center gap-1.5">
+                        <span class="w-2 h-2 rounded-full bg-purple-500"></span>
+                        Total rekap kasus kedisiplinan tercatat di sekolah
+                    </p>
+                </div>
+
+                <!-- Kartu 2: Siswa Status Kritis -->
+                <div class="bg-white/95 backdrop-blur-md border border-rose-100 rounded-3xl p-6 shadow-sm hover:shadow-lg hover:border-rose-300 transition duration-200 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">Siswa Kritis</span>
+                            <div class="w-10 h-10 rounded-2xl bg-rose-100 text-rose-600 flex items-center justify-center shadow-xs">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex items-baseline justify-between">
+                            <div class="text-3xl font-extrabold text-rose-600">{{ \App\Models\Siswa::where('status_disiplin', 'kritis')->count() }}</div>
+                            <span class="text-[11px] font-semibold text-rose-700 bg-rose-50 px-2.5 py-1 rounded-lg">Poin &ge; 55</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-rose-500/80 mt-3 pt-3 border-t border-rose-50 flex items-center gap-1.5">
+                        <span class="w-2 h-2 rounded-full bg-rose-500"></span>
+                        Prioritas penanganan dan pemanggilan orang tua
+                    </p>
+                </div>
+
+                <!-- Kartu 3: Total Siswa Terdaftar -->
+                <div class="bg-white/95 backdrop-blur-md border border-indigo-100 rounded-3xl p-6 shadow-sm hover:shadow-lg hover:border-indigo-300 transition duration-200 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">Data Siswa Aktif</span>
+                            <div class="w-10 h-10 rounded-2xl bg-indigo-100 text-indigo-700 flex items-center justify-center shadow-xs">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex items-baseline justify-between">
+                            <div class="text-3xl font-extrabold text-gray-900">{{ \App\Models\Siswa::count() }}</div>
+                            <span class="text-[11px] font-semibold text-indigo-800 bg-indigo-50 px-2.5 py-1 rounded-lg">Total Siswa</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-3 pt-3 border-t border-gray-100 flex items-center gap-1.5">
+                        <span class="w-2 h-2 rounded-full bg-indigo-500"></span>
+                        Data induk siswa terdaftar dalam sistem
+                    </p>
+                </div>
+            @else
+                <!-- Kartu Guru BK -->
+                <!-- Kartu 1: Total Pelanggaran -->
+                <div class="bg-white/95 backdrop-blur-md border border-purple-100/90 rounded-3xl p-6 shadow-sm hover:shadow-lg hover:border-purple-300 transition duration-200 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">Total Pelanggaran</span>
+                            <div class="w-10 h-10 rounded-2xl bg-purple-100 text-purple-700 flex items-center justify-center shadow-xs">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex items-baseline justify-between">
+                            <div class="text-3xl font-extrabold text-gray-900">{{ \App\Models\Pelanggaran::count() }}</div>
+                            <span class="text-[11px] font-semibold text-purple-700 bg-purple-50 px-2.5 py-1 rounded-lg">Snapshot Poin</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-3 pt-3 border-t border-gray-100 flex items-center gap-1.5">
+                        <span class="w-2 h-2 rounded-full bg-purple-500"></span>
+                        Total kasus kedisiplinan tercatat di sekolah
+                    </p>
+                </div>
+
+                <!-- Kartu 2: Siswa Status Kritis -->
+                <div class="bg-white/95 backdrop-blur-md border border-rose-100 rounded-3xl p-6 shadow-sm hover:shadow-lg hover:border-rose-300 transition duration-200 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">Siswa Kritis</span>
+                            <div class="w-10 h-10 rounded-2xl bg-rose-100 text-rose-600 flex items-center justify-center shadow-xs">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex items-baseline justify-between">
+                            <div class="text-3xl font-extrabold text-rose-600">{{ \App\Models\Siswa::where('status_disiplin', 'kritis')->count() }}</div>
+                            <span class="text-[11px] font-semibold text-rose-700 bg-rose-50 px-2.5 py-1 rounded-lg">Poin &ge; 55</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-rose-500/80 mt-3 pt-3 border-t border-rose-50 flex items-center gap-1.5">
+                        <span class="w-2 h-2 rounded-full bg-rose-500"></span>
+                        Prioritas bimbingan khusus & konseling
+                    </p>
+                </div>
+
+                <!-- Kartu 3: Sesi Pembinaan Aktif -->
+                <div class="bg-white/95 backdrop-blur-md border border-amber-100 rounded-3xl p-6 shadow-sm hover:shadow-lg hover:border-amber-300 transition duration-200 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">Sesi Pembinaan</span>
+                            <div class="w-10 h-10 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center shadow-xs">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex items-baseline justify-between">
+                            <div class="text-3xl font-extrabold text-gray-900">{{ \App\Models\Pembinaan::where('status', '!=', 'selesai')->count() }}</div>
+                            <span class="text-[11px] font-semibold text-amber-800 bg-amber-50 px-2.5 py-1 rounded-lg">Kasus Aktif</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-3 pt-3 border-t border-gray-100 flex items-center gap-1.5">
+                        <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                        Dalam pendampingan konseling Guru BK
+                    </p>
+                </div>
+            @endif
         </div>
 
         <!-- 3. Bagian Interaktif: Indikator Batas Kedisiplinan & Tab Filter -->

@@ -33,6 +33,10 @@ new #[Layout('layouts.app')] class extends Component
 
     public function mount(): void
     {
+        if (! auth()->user()->hasRole('admin')) {
+            abort(403, 'Akses ditolak: Hanya Administrator yang berwenang mengelola data induk siswa.');
+        }
+
         $firstKelas = Kelas::first();
         if ($firstKelas) {
             $this->new_kelas_id = $firstKelas->id;

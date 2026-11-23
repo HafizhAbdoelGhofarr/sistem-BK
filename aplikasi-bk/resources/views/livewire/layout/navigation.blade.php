@@ -53,40 +53,6 @@ new class extends Component
                         {{ __('Pembinaan BK') }}
                     </x-nav-link>
 
-                    @role('admin|guru_bk')
-                        <!-- Menu Catat Pelanggaran Cepat -->
-                        <x-nav-link :href="route('pelanggaran.create')" :active="request()->routeIs('pelanggaran.create')" wire:navigate class="px-3 py-2 rounded-xl text-xs font-bold text-purple-700 bg-purple-50/60 hover:bg-purple-100 transition">
-                            <svg class="w-4 h-4 me-1 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                            </svg>
-                            {{ __('Catat Kasus') }}
-                        </x-nav-link>
-
-                        <!-- Menu Data Siswa -->
-                        <x-nav-link :href="route('master.siswa')" :active="request()->routeIs('master.siswa')" wire:navigate class="px-3 py-2 rounded-xl text-xs font-bold transition">
-                            <svg class="w-4 h-4 me-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                            </svg>
-                            {{ __('Data Siswa') }}
-                        </x-nav-link>
-
-                        <!-- Menu Log WhatsApp -->
-                        <x-nav-link :href="route('notifikasi-wa.index')" :active="request()->routeIs('notifikasi-wa.index')" wire:navigate class="px-3 py-2 rounded-xl text-xs font-bold transition">
-                            <svg class="w-4 h-4 me-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                            </svg>
-                            {{ __('Log WA') }}
-                        </x-nav-link>
-
-                        <!-- Menu Laporan Rekap -->
-                        <x-nav-link :href="route('laporan.index')" :active="request()->routeIs('laporan.index')" wire:navigate class="px-3 py-2 rounded-xl text-xs font-bold transition">
-                            <svg class="w-4 h-4 me-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                            </svg>
-                            {{ __('Laporan') }}
-                        </x-nav-link>
-                    @endrole
-
                     <!-- Menu Buku Tata Tertib (Bisa Diakses Semua Role) -->
                     <x-nav-link :href="route('master.tata-tertib')" :active="request()->routeIs('master.tata-tertib')" wire:navigate class="px-3 py-2 rounded-xl text-xs font-bold transition">
                         <svg class="w-4 h-4 me-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -176,24 +142,6 @@ new class extends Component
             <x-responsive-nav-link :href="route('pembinaan.index')" :active="request()->routeIs('pembinaan.index')" wire:navigate class="rounded-xl">
                 {{ __('Pembinaan BK') }}
             </x-responsive-nav-link>
-
-            @role('admin|guru_bk')
-                <x-responsive-nav-link :href="route('pelanggaran.create')" :active="request()->routeIs('pelanggaran.create')" wire:navigate class="rounded-xl text-purple-700 font-bold bg-purple-50">
-                    {{ __('+ Catat Pelanggaran') }}
-                </x-responsive-nav-link>
-
-                <x-responsive-nav-link :href="route('master.siswa')" :active="request()->routeIs('master.siswa')" wire:navigate class="rounded-xl">
-                    {{ __('Data Siswa') }}
-                </x-responsive-nav-link>
-
-                <x-responsive-nav-link :href="route('notifikasi-wa.index')" :active="request()->routeIs('notifikasi-wa.index')" wire:navigate class="rounded-xl">
-                    {{ __('Log WhatsApp Sidobe') }}
-                </x-responsive-nav-link>
-
-                <x-responsive-nav-link :href="route('laporan.index')" :active="request()->routeIs('laporan.index')" wire:navigate class="rounded-xl">
-                    {{ __('Laporan & Rekap') }}
-                </x-responsive-nav-link>
-            @endrole
 
             <x-responsive-nav-link :href="route('master.tata-tertib')" :active="request()->routeIs('master.tata-tertib')" wire:navigate class="rounded-xl">
                 {{ __('Tata Tertib & Poin') }}
