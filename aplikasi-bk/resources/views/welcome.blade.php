@@ -14,7 +14,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="antialiased font-sans bg-slate-50 text-gray-800 min-h-screen flex flex-col justify-between relative overflow-x-hidden selection:bg-purple-600 selection:text-white"
-          x-data="{ activeTab: 'siswa', simPoin: 15 }">
+          x-data="{ activeTab: 'siswa' }">
         
         <!-- Background Dekoratif Mewah (Mesh Gradient + Subtle Dot Grid) -->
         <div class="fixed inset-0 pointer-events-none z-0">
@@ -187,70 +187,124 @@
                     </div>
                 </div>
 
-                <!-- Bagian Interaktif 2: Simulator Poin Kedisiplinan Siswa (Alpine.js) -->
-                <div class="mt-12 w-full max-w-4xl bg-gradient-to-br from-purple-900 via-purple-800 to-indigo-900 text-white rounded-3xl p-6 sm:p-8 shadow-2xl shadow-purple-950/20 text-left relative overflow-hidden">
-                    <div class="relative z-10">
-                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/10">
+                <!-- Standar Matriks Kedisiplinan Siswa (Official Real-Time Standards) -->
+                <div class="mt-12 w-full max-w-4xl bg-white/95 backdrop-blur-xl border border-purple-100 rounded-3xl p-6 sm:p-8 shadow-xl shadow-purple-900/5 text-left">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-gray-100 gap-4">
+                        <div>
+                            <span class="text-xs font-bold uppercase tracking-wider text-purple-700">Ketentuan & Standar Resmi Sekolah</span>
+                            <h2 class="text-xl font-extrabold text-gray-900 mt-0.5">Matriks Klasifikasi Tingkat Kedisiplinan Siswa</h2>
+                            <p class="text-xs text-gray-500 mt-1">Kategori akumulasi poin pelanggaran dan tindak lanjut penanganan bimbingan konseling secara terstandarisasi.</p>
+                        </div>
+                        <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-purple-50 rounded-xl border border-purple-100 text-purple-800 text-xs font-semibold self-start sm:self-auto">
+                            <span class="w-2 h-2 rounded-full bg-purple-600"></span>
+                            Standar Baku Tata Tertib
+                        </div>
+                    </div>
+
+                    <!-- 4 Kartu Kategori Resmi -->
+                    <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <!-- Card 1: Aman -->
+                        <div class="p-4 rounded-2xl bg-emerald-50/60 border border-emerald-100 flex flex-col justify-between hover:shadow-md transition">
                             <div>
-                                <span class="text-xs font-bold uppercase tracking-wider text-purple-300">Simulasi Interaktif</span>
-                                <h3 class="text-lg sm:text-xl font-bold">Kalkulator Tingkat Kedisiplinan Siswa</h3>
-                                <p class="text-xs text-purple-200 mt-0.5">Geser poin untuk melihat bagaimana sistem mengkategorikan status kedisiplinan</p>
-                            </div>
-
-                            <div class="text-right">
-                                <span class="text-xs text-purple-300 block">Akumulasi Poin:</span>
-                                <span class="text-3xl font-extrabold text-white" x-text="simPoin + ' Poin'"></span>
-                            </div>
-                        </div>
-
-                        <!-- Slider Interaktif -->
-                        <div class="mt-6">
-                            <input type="range" min="0" max="80" step="5" x-model="simPoin"
-                                   class="w-full h-2.5 bg-white/20 rounded-lg appearance-none cursor-pointer accent-purple-400">
-                            <div class="flex justify-between text-[11px] text-purple-300 mt-2 font-medium">
-                                <span>0 Poin (Awal)</span>
-                                <span>25 Poin (Perhatian)</span>
-                                <span>40 Poin (Pembinaan)</span>
-                                <span>55+ Poin (Kritis)</span>
-                            </div>
-                        </div>
-
-                        <!-- Dynamic Status Output -->
-                        <div class="mt-6 p-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/15 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                            <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm flex-shrink-0"
-                                     :class="{
-                                         'bg-emerald-500 text-white': simPoin < 25,
-                                         'bg-amber-500 text-white': simPoin >= 25 && simPoin < 40,
-                                         'bg-orange-500 text-white': simPoin >= 40 && simPoin < 55,
-                                         'bg-rose-500 text-white': simPoin >= 55
-                                     }">
-                                    <span x-show="simPoin < 25">✓</span>
-                                    <span x-show="simPoin >= 25 && simPoin < 40">!</span>
-                                    <span x-show="simPoin >= 40 && simPoin < 55">⚠</span>
-                                    <span x-show="simPoin >= 55">✕</span>
+                                <div class="flex items-center justify-between mb-3">
+                                    <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-200">
+                                        0 - 24 Poin
+                                    </span>
+                                    <span class="w-7 h-7 rounded-lg bg-emerald-600 text-white flex items-center justify-center text-xs font-bold shadow-sm">
+                                        ✓
+                                    </span>
                                 </div>
-                                <div>
-                                    <div class="text-xs text-purple-200 font-medium">Status Kedisiplinan:</div>
-                                    <div class="text-base font-extrabold"
-                                         :class="{
-                                             'text-emerald-300': simPoin < 25,
-                                             'text-amber-300': simPoin >= 25 && simPoin < 40,
-                                             'text-orange-300': simPoin >= 40 && simPoin < 55,
-                                             'text-rose-300': simPoin >= 55
-                                         }"
-                                         x-text="simPoin < 25 ? 'Status Aman (Disiplin Terjaga)' : (simPoin < 40 ? 'Status Perhatian (Peringatan Lisan)' : (simPoin < 55 ? 'Status Pembinaan (Bimbingan Konseling)' : 'Status Kritis (Panggilan Resmi Orang Tua)'))">
-                                    </div>
-                                </div>
+                                <h3 class="font-bold text-sm text-gray-900">Status Aman</h3>
+                                <p class="text-xs text-gray-600 mt-1.5 leading-relaxed">
+                                    Siswa memiliki catatan tertib dan bebas sanksi kedisiplinan. Berhak atas seluruh hak belajar secara penuh.
+                                </p>
                             </div>
-
-                            <div class="text-xs text-purple-200 text-right max-w-xs">
-                                <span x-show="simPoin < 25">Siswa memiliki catatan tertib dan bebas sanksi kedisiplinan.</span>
-                                <span x-show="simPoin >= 25 && simPoin < 40">Mendapat pendampingan wali kelas untuk evaluasi sikap.</span>
-                                <span x-show="simPoin >= 40 && simPoin < 55">Diwajibkan hadir pada sesi konseling khusus bersama Guru BK.</span>
-                                <span x-show="simPoin >= 55">Surat panggilan resmi dikirimkan dan orang tua wajib hadir ke sekolah.</span>
+                            <div class="mt-4 pt-3 border-t border-emerald-100 text-[11px] font-medium text-emerald-800">
+                                Tindak Lanjut: <span class="font-bold">Apresiasi & Pemeliharaan Sikap</span>
                             </div>
                         </div>
+
+                        <!-- Card 2: Perhatian -->
+                        <div class="p-4 rounded-2xl bg-amber-50/60 border border-amber-100 flex flex-col justify-between hover:shadow-md transition">
+                            <div>
+                                <div class="flex items-center justify-between mb-3">
+                                    <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-amber-100 text-amber-800 border border-amber-200">
+                                        25 - 39 Poin
+                                    </span>
+                                    <span class="w-7 h-7 rounded-lg bg-amber-500 text-white flex items-center justify-center text-xs font-bold shadow-sm">
+                                        !
+                                    </span>
+                                </div>
+                                <h3 class="font-bold text-sm text-gray-900">Status Perhatian</h3>
+                                <p class="text-xs text-gray-600 mt-1.5 leading-relaxed">
+                                    Terjadi akumulasi pelanggaran ringan berulang. Memerlukan evaluasi sikap dan kesadaran tata tertib.
+                                </p>
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-amber-100 text-[11px] font-medium text-amber-800">
+                                Tindak Lanjut: <span class="font-bold">Bimbingan Wali Kelas & Peringatan</span>
+                            </div>
+                        </div>
+
+                        <!-- Card 3: Pembinaan -->
+                        <div class="p-4 rounded-2xl bg-orange-50/60 border border-orange-100 flex flex-col justify-between hover:shadow-md transition">
+                            <div>
+                                <div class="flex items-center justify-between mb-3">
+                                    <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-orange-100 text-orange-800 border border-orange-200">
+                                        40 - 54 Poin
+                                    </span>
+                                    <span class="w-7 h-7 rounded-lg bg-orange-500 text-white flex items-center justify-center text-xs font-bold shadow-sm">
+                                        ⚠
+                                    </span>
+                                </div>
+                                <h3 class="font-bold text-sm text-gray-900">Status Pembinaan</h3>
+                                <p class="text-xs text-gray-600 mt-1.5 leading-relaxed">
+                                    Pelanggaran berlanjut ke tahap pembinaan khusus. Siswa mendapatkan sesi konseling mendalam dengan Guru BK.
+                                </p>
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-orange-100 text-[11px] font-medium text-orange-800">
+                                Tindak Lanjut: <span class="font-bold">Konseling BK & Surat Perjanjian</span>
+                            </div>
+                        </div>
+
+                        <!-- Card 4: Kritis -->
+                        <div class="p-4 rounded-2xl bg-rose-50/60 border border-rose-100 flex flex-col justify-between hover:shadow-md transition">
+                            <div>
+                                <div class="flex items-center justify-between mb-3">
+                                    <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-rose-100 text-rose-800 border border-rose-200">
+                                        ≥ 55 Poin
+                                    </span>
+                                    <span class="w-7 h-7 rounded-lg bg-rose-600 text-white flex items-center justify-center text-xs font-bold shadow-sm">
+                                        ✕
+                                    </span>
+                                </div>
+                                <h3 class="font-bold text-sm text-gray-900">Status Kritis</h3>
+                                <p class="text-xs text-gray-600 mt-1.5 leading-relaxed">
+                                    Mencapai ambang batas maksimal kedisiplinan. Memerlukan penanganan terpadu dan pemanggilan wali murid.
+                                </p>
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-rose-100 text-[11px] font-medium text-rose-800">
+                                Tindak Lanjut: <span class="font-bold">Panggilan Orang Tua & Sidang BK</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Notifikasi & Integrasi WhatsApp Real-Time Info -->
+                    <div class="mt-6 p-4 rounded-2xl bg-gradient-to-r from-purple-700 to-indigo-700 text-white flex flex-col sm:flex-row items-center justify-between gap-4 shadow-md shadow-purple-900/10">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-md flex items-center justify-center text-white flex-shrink-0">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm">Integrasi Notifikasi Real-Time Sidobe WhatsApp Gateway</h4>
+                                <p class="text-xs text-purple-100 mt-0.5">Setiap perubahan status dan pencatatan pelanggaran otomatis terkirim langsung ke nomor WhatsApp resmi orang tua siswa.</p>
+                            </div>
+                        </div>
+
+                        <a href="{{ route('login') }}" wire:navigate class="px-4 py-2 bg-white text-purple-800 font-bold text-xs rounded-xl hover:bg-purple-50 transition flex-shrink-0 shadow-sm">
+                            Cek Status Siswa &rarr;
+                        </a>
                     </div>
                 </div>
             </main>
