@@ -32,6 +32,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Volt::route('pembinaan', 'pages.pembinaan.index')->name('pembinaan.index');
     Volt::route('pembinaan/create', 'pages.pembinaan.create')->name('pembinaan.create');
     Volt::route('master/siswa', 'pages.master.siswa')->name('master.siswa');
+    Volt::route('master/tata-tertib', 'pages.master.tata-tertib')->name('master.tata-tertib');
+    Volt::route('laporan', 'pages.laporan.index')->name('laporan.index');
 });
 
 Route::middleware('auth')->prefix('bk')->name('bk.')->group(function () {

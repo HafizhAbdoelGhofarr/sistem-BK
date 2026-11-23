@@ -2,6 +2,7 @@
 
 use App\Models\Kelas;
 use App\Models\Pelanggaran;
+use App\Services\PelanggaranService;
 use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
 use Livewire\WithPagination;
@@ -14,9 +15,58 @@ new #[Layout('layouts.app')] class extends Component
     public string $kelas_id = '';
     public string $status_filter = '';
 
+    // State Modal Edit Pelanggaran
+    public bool $showEditModal = false;
+    public ?int $editId = null;
+    public string $edit_nama_siswa = '';
+    public string $edit_tanggal = '';
+    public string $edit_keterangan = '';
+    public string $edit_status = 'baru';
+
     public function updatingSearch(): void
     {
         $this->resetPage();
+    }
+
+    public function editPelanggaran(int $id): void
+    {
+        $pelanggaran = Pelanggaran::with('siswa')->findOrFail($id);
+        $this->editId = $pelanggaran->id;
+        $this->edit_nama_siswa = $pelanggaran->siswa?->nama ?? '-';
+        $this->edit_tanggal = $pelanggaran->tanggal ? date('Y-m-d', strtotime($pelanggaran->tanggal)) : date('Y-m-d');
+        $this->edit_keterangan = $pelanggaran->keterangan ?? '';
+        $this->edit_status = $pelanggaran->status ?? 'baru';
+        $this->showEditModal = true;
+    }
+
+    public function simpanPerubahan(PelanggaranService $service): void
+    {
+        $this->validate([
+            'edit_tanggal' => ['required', 'date'],
+            'edit_status' => ['required', 'in:baru,dibina,selesai'],
+            'edit_keterangan' => ['nullable', 'string', 'max:500'],
+        ]);
+
+        $pelanggaran = Pelanggaran::findOrFail($this->editId);
+
+        $service->perbarui($pelanggaran, [
+            'tanggal' => $this->edit_tanggal,
+            'status' => $this->edit_status,
+            'keterangan' => $this->edit_keterangan,
+        ]);
+
+        $this->showEditModal = false;
+        $this->reset(['editId', 'edit_nama_siswa', 'edit_tanggal', 'edit_keterangan', 'edit_status']);
+
+        session()->flash('success', 'Catatan pelanggaran berhasil diperbarui!');
+    }
+
+    public function hapusPelanggaran(int $id, PelanggaranService $service): void
+    {
+        $pelanggaran = Pelanggaran::findOrFail($id);
+        $service->hapus($pelanggaran);
+
+        session()->flash('success', 'Catatan pelanggaran berhasil dihapus dan akumulasi poin siswa otomatis diperbarui!');
     }
 
     public function with(): array
@@ -50,6 +100,17 @@ new #[Layout('layouts.app')] class extends Component
 }; ?>
 
 <div class="space-y-6">
+    <!-- Flash Notification -->
+    @if (session()->has('success'))
+        <div class="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold flex items-center justify-between shadow-xs">
+            <div class="flex items-center gap-2">
+                <span class="w-5 h-5 rounded-full bg-emerald-600 text-white flex items-center justify-center text-[10px]">✓</span>
+                <span>{{ session('success') }}</span>
+            </div>
+            <button @click="$el.parentElement.remove()" class="text-emerald-500 hover:text-emerald-700 font-bold">&times;</button>
+        </div>
+    @endif
+
     <!-- Header Halaman -->
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
@@ -130,6 +191,9 @@ new #[Layout('layouts.app')] class extends Component
                         <th class="py-3.5 px-4">Status Kasus</th>
                         <th class="py-3.5 px-4">WhatsApp Ortu</th>
                         <th class="py-3.5 px-4">Pelapor</th>
+                        @role('admin|guru_bk')
+                            <th class="py-3.5 px-4 text-center">Aksi</th>
+                        @endrole
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-100 text-gray-700">
@@ -209,10 +273,35 @@ new #[Layout('layouts.app')] class extends Component
                             <td class="py-3.5 px-4 whitespace-nowrap text-gray-500">
                                 {{ $item->pelapor?->name ?? 'Sistem' }}
                             </td>
+
+                            <!-- Aksi Edit & Hapus (Admin & Guru BK) -->
+                            @role('admin|guru_bk')
+                                <td class="py-3.5 px-4 whitespace-nowrap text-center">
+                                    <div class="inline-flex items-center gap-1.5">
+                                        <!-- Edit -->
+                                        <button wire:click="editPelanggaran({{ $item->id }})" title="Edit Catatan Kasus"
+                                                class="p-1.5 text-gray-500 hover:text-purple-700 hover:bg-purple-50 rounded-lg transition">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                            </svg>
+                                        </button>
+
+                                        <!-- Hapus -->
+                                        <button wire:click="hapusPelanggaran({{ $item->id }})"
+                                                wire:confirm="Yakin ingin menghapus catatan pelanggaran ini? Akumulasi poin siswa akan otomatis dikurangi kembali."
+                                                title="Hapus Pelanggaran"
+                                                class="p-1.5 text-gray-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </td>
+                            @endrole
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="7" class="py-12 text-center text-gray-400">
+                            <td colspan="{{ auth()->user()->hasRole('siswa') ? 7 : 8 }}" class="py-12 text-center text-gray-400">
                                 <div class="w-12 h-12 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center mx-auto mb-3">
                                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -234,4 +323,61 @@ new #[Layout('layouts.app')] class extends Component
             </div>
         @endif
     </div>
+
+    <!-- Modal Edit Pelanggaran (Admin & Guru BK) -->
+    @if ($showEditModal)
+        <div class="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+            <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-purple-100 text-left relative animate-in fade-in zoom-in-95 duration-150">
+                <div class="flex items-center justify-between pb-4 border-b border-gray-100 mb-5">
+                    <div>
+                        <span class="text-[11px] font-bold text-purple-700 uppercase tracking-wider">Perbarui Data</span>
+                        <h3 class="text-base font-extrabold text-gray-900">Koreksi Catatan Pelanggaran</h3>
+                        <p class="text-xs text-gray-500 mt-0.5">Siswa: <span class="font-bold text-purple-900">{{ $edit_nama_siswa }}</span></p>
+                    </div>
+                    <button wire:click="$set('showEditModal', false)" class="text-gray-400 hover:text-gray-600 font-bold text-xl leading-none">&times;</button>
+                </div>
+
+                <form wire:submit="simpanPerubahan" class="space-y-4">
+                    <!-- Tanggal Kejadian -->
+                    <div>
+                        <x-input-label for="edit_tanggal" :value="__('Tanggal Kejadian')" class="font-bold text-xs text-gray-700" />
+                        <x-text-input wire:model="edit_tanggal" id="edit_tanggal" type="date" class="mt-1 block w-full py-2" required />
+                        <x-input-error :messages="$errors->get('edit_tanggal')" class="mt-1" />
+                    </div>
+
+                    <!-- Status Kasus -->
+                    <div>
+                        <x-input-label for="edit_status" :value="__('Status Kasus Kedisiplinan')" class="font-bold text-xs text-gray-700" />
+                        <select wire:model="edit_status" id="edit_status" class="mt-1 block w-full border-gray-200 focus:border-purple-600 focus:ring-purple-500 rounded-xl text-xs text-gray-800 py-2">
+                            <option value="baru">Baru Dicatat</option>
+                            <option value="dibina">Dalam Pembinaan BK</option>
+                            <option value="selesai">Selesai / Ditutup</option>
+                        </select>
+                        <x-input-error :messages="$errors->get('edit_status')" class="mt-1" />
+                    </div>
+
+                    <!-- Keterangan Tambahan / Kronologi -->
+                    <div>
+                        <x-input-label for="edit_keterangan" :value="__('Keterangan / Kronologi Kasus')" class="font-bold text-xs text-gray-700" />
+                        <textarea wire:model="edit_keterangan" id="edit_keterangan" rows="3"
+                                  class="mt-1 block w-full border-gray-200 focus:border-purple-600 focus:ring-purple-500 rounded-xl text-xs text-gray-800 shadow-2xs placeholder-gray-400"
+                                  placeholder="Catatan tambahan hasil klarifikasi atau koreksi..."></textarea>
+                        <x-input-error :messages="$errors->get('edit_keterangan')" class="mt-1" />
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="pt-3 flex items-center justify-end gap-2.5 border-t border-gray-100">
+                        <button type="button" wire:click="$set('showEditModal', false)"
+                                class="px-4 py-2 border border-gray-200 text-gray-600 hover:bg-gray-50 rounded-xl text-xs font-bold transition">
+                            Batal
+                        </button>
+                        <button type="submit"
+                                class="px-5 py-2 bg-gradient-to-r from-purple-700 to-purple-600 hover:from-purple-800 hover:to-purple-700 text-white rounded-xl text-xs font-bold shadow-md shadow-purple-600/20 transition">
+                            Simpan Perubahan
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    @endif
 </div>

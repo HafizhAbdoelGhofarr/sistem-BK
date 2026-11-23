@@ -60,6 +60,14 @@ new #[Layout('layouts.app')] class extends Component
         session()->flash('success', 'Catatan tindak lanjut berhasil disimpan dan status kasus diperbarui!');
     }
 
+    public function hapusPembinaan(int $id): void
+    {
+        $pembinaan = Pembinaan::findOrFail($id);
+        $pembinaan->delete();
+
+        session()->flash('success', 'Sesi pembinaan berhasil dihapus dari jadwal!');
+    }
+
     public function with(): array
     {
         $querySesi = Pembinaan::with(['siswa.kelas', 'pelanggaran.jenisPelanggaran', 'guruBk', 'tindakLanjut'])->latest('tanggal');
@@ -200,13 +208,25 @@ new #[Layout('layouts.app')] class extends Component
                                 </td>
                                 <td class="py-3.5 px-4 whitespace-nowrap text-right">
                                     @role('admin|guru_bk')
-                                        @if ($item->status !== 'selesai')
-                                            <button wire:click="bukaModalTindakLanjut({{ $item->id }})" class="px-3 py-1.5 bg-purple-700 hover:bg-purple-800 text-white rounded-xl text-xs font-bold shadow-xs transition">
-                                                + Tindak Lanjut
+                                        <div class="inline-flex items-center gap-1.5">
+                                            @if ($item->status !== 'selesai')
+                                                <button wire:click="bukaModalTindakLanjut({{ $item->id }})" class="px-3 py-1.5 bg-purple-700 hover:bg-purple-800 text-white rounded-xl text-xs font-bold shadow-xs transition">
+                                                    + Tindak Lanjut
+                                                </button>
+                                            @else
+                                                <span class="text-xs font-semibold text-emerald-600 mr-1">Selesai Dibina</span>
+                                            @endif
+
+                                            <!-- Tombol Hapus Sesi -->
+                                            <button wire:click="hapusPembinaan({{ $item->id }})"
+                                                    wire:confirm="Yakin ingin membatalkan/menghapus jadwal sesi pembinaan ini?"
+                                                    title="Hapus Sesi Pembinaan"
+                                                    class="p-1.5 text-gray-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                </svg>
                                             </button>
-                                        @else
-                                            <span class="text-xs font-semibold text-emerald-600">Selesai Dibina</span>
-                                        @endif
+                                        </div>
                                     @endrole
                                 </td>
                             </tr>
