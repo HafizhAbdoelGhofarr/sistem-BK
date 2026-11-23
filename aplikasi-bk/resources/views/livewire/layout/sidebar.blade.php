@@ -24,8 +24,12 @@ new class extends Component
 
         <!-- 2. Ringkasan Profil Pengguna di Sidebar -->
         <div class="p-4 mx-3 my-3 rounded-2xl bg-purple-50/60 border border-purple-100/80 flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-700 to-purple-500 text-white flex items-center justify-center font-bold text-sm uppercase shadow-xs flex-shrink-0">
-                {{ substr(auth()->user()->name ?? 'U', 0, 1) }}
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-700 to-purple-500 text-white flex items-center justify-center font-bold text-sm uppercase shadow-xs flex-shrink-0 overflow-hidden">
+                @if (auth()->user()->avatar && \Illuminate\Support\Facades\Storage::disk('public')->exists(auth()->user()->avatar))
+                    <img src="{{ asset('storage/' . auth()->user()->avatar) }}" class="w-full h-full object-cover" alt="Avatar">
+                @else
+                    {{ substr(auth()->user()->name ?? 'U', 0, 1) }}
+                @endif
             </div>
             <div class="min-w-0 flex-1">
                 <span class="block font-bold text-xs text-gray-900 truncate">

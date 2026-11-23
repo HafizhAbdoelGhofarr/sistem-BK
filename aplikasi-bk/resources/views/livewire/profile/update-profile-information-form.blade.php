@@ -65,24 +65,24 @@ new class extends Component
 <section>
     <header class="text-center pb-4 border-b border-gray-100">
         <h2 class="text-base font-extrabold text-gray-900">
-            {{ __('Informasi Profil Pengguna') }}
+            {{ __('Ganti Alamat Surel (Email)') }}
         </h2>
 
         <p class="mt-1 text-xs text-gray-500">
-            {{ __('Perbarui nama lengkap dan alamat surel (email) akun Anda') }}
+            {{ __('Perbarui alamat email resmi untuk login dan penerimaan notifikasi sistem') }}
         </p>
     </header>
 
     <form wire:submit="updateProfileInformation" class="mt-6 space-y-5">
         <div>
-            <x-input-label for="name" :value="__('Nama Lengkap')" class="font-bold text-xs text-gray-700 mb-1" />
-            <x-text-input wire:model="name" id="name" name="name" type="text" class="block w-full py-2.5" required autofocus autocomplete="name" />
+            <x-input-label for="profile_name" :value="__('Nama Tampilan Akun')" class="font-bold text-xs text-gray-700 mb-1" />
+            <x-text-input wire:model="name" id="profile_name" name="name" type="text" class="block w-full py-2.5 text-xs font-semibold" required autocomplete="name" />
             <x-input-error class="mt-1" :messages="$errors->get('name')" />
         </div>
 
         <div>
-            <x-input-label for="email" :value="__('Alamat Surel (Email)')" class="font-bold text-xs text-gray-700 mb-1" />
-            <x-text-input wire:model="email" id="email" name="email" type="email" class="block w-full py-2.5" required autocomplete="username" />
+            <x-input-label for="profile_email" :value="__('Alamat Surel (Email) Baru')" class="font-bold text-xs text-gray-700 mb-1" />
+            <x-text-input wire:model="email" id="profile_email" name="email" type="email" class="block w-full py-2.5 text-xs font-semibold font-mono" required autocomplete="username" />
             <x-input-error class="mt-1" :messages="$errors->get('email')" />
 
             @if (auth()->user() instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! auth()->user()->hasVerifiedEmail())

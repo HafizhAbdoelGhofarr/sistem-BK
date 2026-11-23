@@ -69,8 +69,12 @@ new class extends Component
                 <x-dropdown align="right" width="56">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center gap-2.5 px-3 py-1.5 border border-purple-100 text-sm leading-4 font-medium rounded-2xl text-gray-700 bg-purple-50/60 hover:bg-purple-100/70 hover:text-purple-900 focus:outline-none transition ease-in-out duration-150 shadow-xs">
-                            <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-purple-700 to-purple-500 text-white flex items-center justify-center font-bold text-xs uppercase shadow-sm">
-                                {{ substr(auth()->user()->name ?? 'U', 0, 1) }}
+                            <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-purple-700 to-purple-500 text-white flex items-center justify-center font-bold text-xs uppercase shadow-sm overflow-hidden">
+                                @if (auth()->user()->avatar && \Illuminate\Support\Facades\Storage::disk('public')->exists(auth()->user()->avatar))
+                                    <img src="{{ asset('storage/' . auth()->user()->avatar) }}" class="w-full h-full object-cover" alt="Avatar">
+                                @else
+                                    {{ substr(auth()->user()->name ?? 'U', 0, 1) }}
+                                @endif
                             </div>
                             <div class="text-left">
                                 <span class="block font-bold text-xs leading-tight text-gray-900 max-w-[130px] truncate">
