@@ -30,6 +30,9 @@ new #[Layout('layouts.guest')] class extends Component
 
         event(new Registered($user = User::create($validated)));
 
+        // Berikan role 'siswa' secara otomatis ke akun yang baru mendaftar
+        $user->assignRole('siswa');
+
         Auth::login($user);
 
         $this->redirect(route('dashboard', absolute: false), navigate: true);
