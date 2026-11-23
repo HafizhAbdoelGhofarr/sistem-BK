@@ -37,22 +37,30 @@ new class extends Component
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
-                    @role('admin')
-                        <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-purple-100 text-purple-700 uppercase tracking-wider ms-2">
-                            Mode Admin
-                        </span>
-                    @endrole
+                    <!-- Menu Pelanggaran -->
+                    <x-nav-link :href="route('pelanggaran.index')" :active="request()->routeIs('pelanggaran.index')" wire:navigate class="px-3 py-2 rounded-xl text-xs font-bold transition">
+                        <svg class="w-4 h-4 me-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                        </svg>
+                        {{ __('Pelanggaran') }}
+                    </x-nav-link>
 
-                    @role('guru_bk')
-                        <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-800 uppercase tracking-wider ms-2">
-                            Mode Konselor BK
-                        </span>
-                    @endrole
+                    @role('admin|guru_bk')
+                        <!-- Menu Catat Pelanggaran Cepat -->
+                        <x-nav-link :href="route('pelanggaran.create')" :active="request()->routeIs('pelanggaran.create')" wire:navigate class="px-3 py-2 rounded-xl text-xs font-bold text-purple-700 bg-purple-50/60 hover:bg-purple-100 transition">
+                            <svg class="w-4 h-4 me-1 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                            </svg>
+                            {{ __('Catat Kasus') }}
+                        </x-nav-link>
 
-                    @role('siswa')
-                        <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800 uppercase tracking-wider ms-2">
-                            Portal Siswa
-                        </span>
+                        <!-- Menu Log WhatsApp -->
+                        <x-nav-link :href="route('notifikasi-wa.index')" :active="request()->routeIs('notifikasi-wa.index')" wire:navigate class="px-3 py-2 rounded-xl text-xs font-bold transition">
+                            <svg class="w-4 h-4 me-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                            </svg>
+                            {{ __('Log WhatsApp') }}
+                        </x-nav-link>
                     @endrole
                 </div>
             </div>
@@ -134,6 +142,20 @@ new class extends Component
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate class="rounded-xl">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+
+            <x-responsive-nav-link :href="route('pelanggaran.index')" :active="request()->routeIs('pelanggaran.index')" wire:navigate class="rounded-xl">
+                {{ __('Riwayat Pelanggaran') }}
+            </x-responsive-nav-link>
+
+            @role('admin|guru_bk')
+                <x-responsive-nav-link :href="route('pelanggaran.create')" :active="request()->routeIs('pelanggaran.create')" wire:navigate class="rounded-xl text-purple-700 font-bold bg-purple-50">
+                    {{ __('+ Catat Pelanggaran') }}
+                </x-responsive-nav-link>
+
+                <x-responsive-nav-link :href="route('notifikasi-wa.index')" :active="request()->routeIs('notifikasi-wa.index')" wire:navigate class="rounded-xl">
+                    {{ __('Log WhatsApp Sidobe') }}
+                </x-responsive-nav-link>
+            @endrole
         </div>
 
         <!-- Responsive Settings Options -->

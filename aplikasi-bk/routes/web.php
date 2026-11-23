@@ -13,6 +13,7 @@ use App\Http\Controllers\Backend\TataTertibController;
 use App\Http\Controllers\Backend\TindakLanjutController;
 use App\Http\Controllers\Backend\UserController;
 use Illuminate\Support\Facades\Route;
+use Livewire\Volt\Volt;
 
 Route::view('/', 'welcome');
 
@@ -23,6 +24,12 @@ Route::view('dashboard', 'dashboard')
 Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Volt::route('pelanggaran', 'pages.pelanggaran.index')->name('pelanggaran.index');
+    Volt::route('pelanggaran/create', 'pages.pelanggaran.create')->name('pelanggaran.create');
+    Volt::route('notifikasi-wa', 'pages.notifikasi-wa.index')->name('notifikasi-wa.index');
+});
 
 Route::middleware('auth')->prefix('bk')->name('bk.')->group(function () {
     Route::get('batas-status', [BatasStatusController::class, 'index'])->name('batas-status.index');

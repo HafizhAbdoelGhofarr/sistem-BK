@@ -60,25 +60,25 @@
                 <!-- Tombol Aksi Cepat di Banner -->
                 <div class="mt-6 flex flex-wrap items-center gap-3">
                     @role('admin|guru_bk')
-                        <a href="{{ route('bk.pelanggaran.index') }}" class="inline-flex items-center gap-2 px-4 py-2.5 bg-white text-purple-900 hover:bg-purple-50 text-xs font-bold rounded-xl shadow-md transition transform hover:-translate-y-0.5">
+                        <a href="{{ route('pelanggaran.create') }}" wire:navigate class="inline-flex items-center gap-2 px-4 py-2.5 bg-white text-purple-900 hover:bg-purple-50 text-xs font-bold rounded-xl shadow-md transition transform hover:-translate-y-0.5">
                             <svg class="w-4 h-4 text-purple-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                             </svg>
                             Input Pelanggaran Baru
                         </a>
-                        <a href="{{ route('bk.pembinaan.index') }}" class="inline-flex items-center gap-2 px-4 py-2.5 bg-white/15 hover:bg-white/25 text-white border border-white/20 text-xs font-bold rounded-xl backdrop-blur-sm transition">
+                        <a href="{{ route('pelanggaran.index') }}" wire:navigate class="inline-flex items-center gap-2 px-4 py-2.5 bg-white/15 hover:bg-white/25 text-white border border-white/20 text-xs font-bold rounded-xl backdrop-blur-sm transition">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                             </svg>
-                            Jadwal Sesi Pembinaan
+                            Data Pelanggaran Siswa
                         </a>
                     @else
-                        <button @click="showGuideModal = true" class="inline-flex items-center gap-2 px-4 py-2.5 bg-white text-purple-900 hover:bg-purple-50 text-xs font-bold rounded-xl shadow-md transition">
+                        <a href="{{ route('pelanggaran.index') }}" wire:navigate class="inline-flex items-center gap-2 px-4 py-2.5 bg-white text-purple-900 hover:bg-purple-50 text-xs font-bold rounded-xl shadow-md transition">
                             <svg class="w-4 h-4 text-purple-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
-                            Panduan Tata Tertib Siswa
-                        </button>
+                            Lihat Catatan Poin Saya
+                        </a>
                     @endrole
                 </div>
             </div>
@@ -106,7 +106,7 @@
                     </div>
                 </div>
                 <div class="mt-4 flex items-baseline justify-between">
-                    <div class="text-3xl font-extrabold text-gray-900">0</div>
+                    <div class="text-3xl font-extrabold text-gray-900">{{ \App\Models\Pelanggaran::count() }}</div>
                     <span class="text-[11px] font-semibold text-purple-700 bg-purple-50 px-2 py-0.5 rounded-md">Snapshot Poin</span>
                 </div>
                 <p class="text-xs text-gray-400 mt-1.5 flex items-center gap-1">
@@ -126,7 +126,7 @@
                     </div>
                 </div>
                 <div class="mt-4 flex items-baseline justify-between">
-                    <div class="text-3xl font-extrabold text-rose-600">0</div>
+                    <div class="text-3xl font-extrabold text-rose-600">{{ \App\Models\Siswa::where('status_disiplin', 'kritis')->count() }}</div>
                     <span class="text-[11px] font-semibold text-rose-700 bg-rose-50 px-2 py-0.5 rounded-md">Poin &ge; 55</span>
                 </div>
                 <p class="text-xs text-rose-500/80 mt-1.5 flex items-center gap-1">
@@ -138,6 +138,42 @@
             <!-- Kartu 3: Sesi Pembinaan Aktif -->
             <div class="bg-white/95 backdrop-blur-md border border-amber-100 rounded-2xl p-5 shadow-sm hover:shadow-lg hover:border-amber-300 transition duration-200">
                 <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">Sesi Pembinaan</span>
+                    <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center shadow-xs">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="mt-4 flex items-baseline justify-between">
+                    <div class="text-3xl font-extrabold text-gray-900">{{ \App\Models\Pembinaan::where('status', '!=', 'selesai')->count() }}</div>
+                    <span class="text-[11px] font-semibold text-amber-800 bg-amber-50 px-2 py-0.5 rounded-md">Kasus Aktif</span>
+                </div>
+                <p class="text-xs text-gray-400 mt-1.5 flex items-center gap-1">
+                    <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+                    Pendampingan konselor BK
+                </p>
+            </div>
+
+            <!-- Kartu 4: Notifikasi WhatsApp Sidobe -->
+            <div class="bg-white/95 backdrop-blur-md border border-emerald-100 rounded-2xl p-5 shadow-sm hover:shadow-lg hover:border-emerald-300 transition duration-200">
+                <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">Gateway Sidobe</span>
+                    <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center shadow-xs">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="mt-4 flex items-baseline justify-between">
+                    <div class="text-2xl font-extrabold text-emerald-600">{{ \App\Models\NotifikasiWa::count() }} Pesan</div>
+                    <span class="text-[11px] font-semibold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-md">Queue Driver</span>
+                </div>
+                <p class="text-xs text-emerald-700/80 mt-1.5 flex items-center gap-1">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                    Otomatis terkirim ke no. ortu
+                </p>
+            </div>
                     <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">Sesi Pembinaan</span>
                     <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center shadow-xs">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
