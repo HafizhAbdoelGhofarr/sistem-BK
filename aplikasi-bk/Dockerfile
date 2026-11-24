@@ -9,8 +9,8 @@ RUN npm run build
 # Stage 2: base PHP
 FROM dunglas/frankenphp:1-php8.4-bookworm AS base
 RUN cp "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" \
-    && install-php-extensions intl zip
-WORKDIR /app
+    && install-php-extensions intl zip gd bcmath exif pdo_mysql
+    WORKDIR /app
 
 FROM base AS dependencies
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
