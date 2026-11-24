@@ -13,24 +13,8 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased bg-brand-50 text-gray-800 min-h-screen flex items-center justify-center p-4 relative overflow-hidden selection:bg-purple-600 selection:text-white">
+    <body class="font-sans antialiased bg-white text-gray-800 min-h-screen flex items-center justify-center p-4 relative overflow-hidden selection:bg-purple-600 selection:text-white">
         
-        <!-- Background Dekoratif Mewah (Mesh Gradient + Dots) -->
-        <div class="fixed inset-0 pointer-events-none z-0">
-            <div class="absolute -top-32 -left-32 w-[32rem] h-[32rem] bg-purple-300/30 rounded-full blur-3xl"></div>
-            <div class="absolute top-1/2 -right-32 w-96 h-96 bg-indigo-200/35 rounded-full blur-3xl"></div>
-            <div class="absolute -bottom-32 left-1/3 w-[30rem] h-[30rem] bg-purple-200/30 rounded-full blur-3xl"></div>
-            
-            <svg class="absolute inset-0 w-full h-full opacity-[0.22]" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <pattern id="dot-pattern-404" width="28" height="28" patternUnits="userSpaceOnUse">
-                        <circle cx="2" cy="2" r="1.2" fill="#17736D" />
-                    </pattern>
-                </defs>
-                <rect width="100%" height="100%" fill="url(#dot-pattern-404)" />
-            </svg>
-        </div>
-
         <div class="relative z-10 w-full max-w-lg text-center">
             <!-- Card 404 -->
             <div class="bg-white/95 backdrop-blur-xl border border-purple-100/90 rounded-3xl p-8 sm:p-10 shadow-2xl shadow-purple-950/10">

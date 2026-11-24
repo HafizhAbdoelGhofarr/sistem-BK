@@ -61,18 +61,18 @@ Sistem dirancang mencakup kebutuhan civitas sekolah dengan pembagian hak akses:
 
 ## 3. DESIGN SYSTEM & ATURAN TEMA (WHITE & MINT GREEN)
 
-Sesuai referensi identitas DIGISELF, frontend mengusung gaya **Simple, Clean, Modern dengan dominasi hijau mint muda, permukaan putih, dan aksen hijau-teal**.
+Sesuai referensi identitas DIGISELF, frontend mengusung gaya **Simple, Clean, Modern dengan latar putih dan banner gradasi hijau mint yang jelas terlihat**.
 
 ### 3.1 Palet Warna (Color Palette)
 
 | Kategori Warna | Kode Hex | Penggunaan UI |
 |---|---|---|
-| **Mint Canvas** | `#F3FFF5` | Latar utama aplikasi dan kanvas halaman |
-| **Soft Green Tint** | `#DDF7E2` | Background kartu highlight, badge, dan row hover |
+| **Page Canvas & Surface** | `#FFFFFF` | Latar utama aplikasi, kartu, modal, dan form |
+| **Soft Green Tint** | `#DDF7E2` | Kartu highlight, badge, dan row hover |
+| **Banner Gradient** | `#C2EDCC` → `#9FE0B0` | Gradasi hijau menengah agar jelas di atas latar putih |
 | **Primary Green-Teal** | `#17736D` | Sidebar aktif, header brand, tombol utama, dan tautan |
 | **Green Accent** | `#55B971` | Aksen hijau muda, hover state, indikator aktif |
 | **Deep Teal** | `#103743` | Teks brand dan latar gelap beraksen |
-| **Pure White** | `#FFFFFF` | Background konten utama, card container, modal, form input |
 | **Subtle Gray** | `#F9FAFB` (Gray-50) | Permukaan netral sekunder |
 | **Border Gray** | `#E5E7EB` (Gray-200) | Garis pemisah tabel, border card, border input form |
 | **Text Primary** | `#1F2937` (Gray-800) | Teks judul, label form, teks tabel |
@@ -116,7 +116,7 @@ Untuk menjaga kerapian repositori dan batasan pekerjaan tim:
 
 ## 5. FITUR AUTENTIKASI & SISTEM ALUR PASCA-AUTENTIKASI
 
-Modul autentikasi dirancang ramah pengguna (*user-friendly*) dengan latar hijau mint muda, kartu putih, dan aksen hijau-teal, dilengkapi fitur keamanan standar.
+Modul autentikasi dirancang ramah pengguna (*user-friendly*) dengan latar putih, kartu putih, dan aksen hijau-teal, dilengkapi fitur keamanan standar.
 
 ```
                       ┌────────────────────────────────┐

@@ -14,25 +14,9 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased text-gray-800 min-h-screen flex flex-col relative bg-brand-50 selection:bg-purple-600 selection:text-white"
+    <body class="font-sans antialiased text-gray-800 min-h-screen flex flex-col relative bg-white selection:bg-purple-600 selection:text-white"
           x-data="{ mobileSidebarOpen: false }">
         
-        <!-- Background Dekoratif Mewah (Mesh Gradient + Dots) -->
-        <div class="fixed inset-0 pointer-events-none z-0">
-            <div class="absolute -top-32 -left-32 w-96 h-96 bg-purple-200/30 rounded-full blur-3xl"></div>
-            <div class="absolute top-1/2 -right-32 w-96 h-96 bg-indigo-100/40 rounded-full blur-3xl"></div>
-            <div class="absolute -bottom-32 left-1/4 w-[28rem] h-[28rem] bg-purple-100/40 rounded-full blur-3xl"></div>
-            
-            <svg class="absolute inset-0 w-full h-full opacity-[0.2]" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <pattern id="app-dot-pattern" width="28" height="28" patternUnits="userSpaceOnUse">
-                        <circle cx="2" cy="2" r="1.2" fill="#17736D" />
-                    </pattern>
-                </defs>
-                <rect width="100%" height="100%" fill="url(#app-dot-pattern)" />
-            </svg>
-        </div>
-
         @php
             $isAdminOrGuru = auth()->check() && auth()->user()->hasRole(['admin', 'guru_bk']);
         @endphp

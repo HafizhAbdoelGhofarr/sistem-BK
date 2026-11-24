@@ -78,26 +78,26 @@ new #[Layout('layouts.app')] class extends Component
     </div>
 
     <!-- Info Box Status Integrasi Sidobe -->
-    <div class="p-5 bg-gradient-to-r from-purple-900 via-purple-800 to-indigo-900 text-white rounded-3xl shadow-lg shadow-purple-950/10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+    <div class="p-5 bg-gradient-to-r from-purple-200 via-purple-300 to-indigo-200 text-gray-900 rounded-3xl shadow-lg shadow-purple-950/10 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div class="space-y-1">
-            <div class="flex items-center gap-2 text-xs text-purple-200 font-bold uppercase tracking-wider">
-                <svg class="w-4 h-4 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
+            <div class="flex items-center gap-2 text-xs text-purple-900 font-bold uppercase tracking-wider">
+                <svg class="w-4 h-4 text-emerald-700" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                 </svg>
                 Otomasi Pengiriman Pesan Aktif
             </div>
-            <h3 class="text-base font-bold text-white">Layanan Notifikasi Terjadwal (Queue Database)</h3>
-            <p class="text-xs text-purple-200/90 max-w-xl">
+            <h3 class="text-base font-bold text-gray-900">Layanan Notifikasi Terjadwal (Queue Database)</h3>
+            <p class="text-xs text-gray-700 max-w-xl">
                 Setiap kali pelanggaran dicatat, sistem memasukkan job ke antrean background agar aplikasi tetap cepat. Pesan berisi nama siswa, kelas, jenis pelanggaran, dan akumulasi poin terkini.
             </p>
         </div>
 
         <!-- Filter Status Tab -->
-        <div class="inline-flex p-1 bg-white/10 rounded-2xl border border-white/15 text-xs self-start md:self-center">
-            <button wire:click="$set('statusFilter', '')" class="px-3 py-1.5 rounded-xl font-bold transition {{ $statusFilter === '' ? 'bg-white text-purple-900' : 'text-purple-200 hover:text-white' }}">Semua</button>
-            <button wire:click="$set('statusFilter', 'terkirim')" class="px-3 py-1.5 rounded-xl font-bold transition {{ $statusFilter === 'terkirim' ? 'bg-emerald-500 text-white' : 'text-purple-200 hover:text-white' }}">Terkirim</button>
-            <button wire:click="$set('statusFilter', 'pending')" class="px-3 py-1.5 rounded-xl font-bold transition {{ $statusFilter === 'pending' ? 'bg-amber-500 text-white' : 'text-purple-200 hover:text-white' }}">Antrean</button>
-            <button wire:click="$set('statusFilter', 'gagal')" class="px-3 py-1.5 rounded-xl font-bold transition {{ $statusFilter === 'gagal' ? 'bg-rose-500 text-white' : 'text-purple-200 hover:text-white' }}">Gagal</button>
+        <div class="inline-flex p-1 bg-white/70 rounded-2xl border border-purple-200 text-xs self-start md:self-center">
+            <button wire:click="$set('statusFilter', '')" class="px-3 py-1.5 rounded-xl font-bold transition {{ $statusFilter === '' ? 'bg-purple-700 text-white' : 'text-gray-700 hover:text-purple-900' }}">Semua</button>
+            <button wire:click="$set('statusFilter', 'terkirim')" class="px-3 py-1.5 rounded-xl font-bold transition {{ $statusFilter === 'terkirim' ? 'bg-emerald-700 text-white' : 'text-gray-700 hover:text-purple-900' }}">Terkirim</button>
+            <button wire:click="$set('statusFilter', 'pending')" class="px-3 py-1.5 rounded-xl font-bold transition {{ $statusFilter === 'pending' ? 'bg-amber-600 text-white' : 'text-gray-700 hover:text-purple-900' }}">Antrean</button>
+            <button wire:click="$set('statusFilter', 'gagal')" class="px-3 py-1.5 rounded-xl font-bold transition {{ $statusFilter === 'gagal' ? 'bg-rose-600 text-white' : 'text-gray-700 hover:text-purple-900' }}">Gagal</button>
         </div>
     </div>
 

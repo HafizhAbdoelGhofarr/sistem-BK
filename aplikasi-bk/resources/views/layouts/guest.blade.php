@@ -14,26 +14,8 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans text-gray-900 antialiased min-h-screen flex flex-col justify-between relative overflow-x-hidden bg-brand-50 selection:bg-purple-600 selection:text-white">
+    <body class="font-sans text-gray-900 antialiased min-h-screen flex flex-col justify-between relative overflow-x-hidden bg-white selection:bg-purple-600 selection:text-white">
         
-        <!-- Background Dekoratif Mewah (Mesh Gradient + Subtle Dot Grid) -->
-        <div class="fixed inset-0 pointer-events-none z-0">
-            <!-- Lingkaran cahaya dengan gradasi hijau mint -->
-            <div class="absolute -top-40 -left-40 w-96 h-96 bg-purple-300/40 rounded-full blur-3xl"></div>
-            <div class="absolute top-1/3 -right-32 w-96 h-96 bg-indigo-200/40 rounded-full blur-3xl"></div>
-            <div class="absolute -bottom-32 left-1/3 w-[30rem] h-[30rem] bg-purple-200/30 rounded-full blur-3xl"></div>
-            
-            <!-- Pola Dot Grid Halus -->
-            <svg class="absolute inset-0 w-full h-full opacity-[0.25]" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <pattern id="dot-pattern" width="24" height="24" patternUnits="userSpaceOnUse">
-                        <circle cx="2" cy="2" r="1.2" fill="#17736D" />
-                    </pattern>
-                </defs>
-                <rect width="100%" height="100%" fill="url(#dot-pattern)" />
-            </svg>
-        </div>
-
         <!-- Header Institusional Sekolah -->
         <header class="relative z-10 w-full border-b border-purple-100/60 bg-white/70 backdrop-blur-md sticky top-0">
             <div class="max-w-6xl mx-auto px-4 sm:px-8 py-3.5 flex justify-between items-center">
