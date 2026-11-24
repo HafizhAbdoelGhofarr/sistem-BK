@@ -34,12 +34,12 @@
     }">
 
         <!-- 1. Banner sambutan premium dengan gradien hijau mint -->
-        <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-purple-200 via-purple-300 to-indigo-200 text-gray-900 p-7 sm:p-9 shadow-xl shadow-purple-950/10">
+        <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-purple-900 via-purple-800 to-indigo-900 text-white p-7 sm:p-9 shadow-xl shadow-purple-950/15">
             <div class="relative z-10 max-w-2xl">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/75 backdrop-blur-md text-xs font-semibold text-purple-900 mb-4 border border-purple-200/80">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 backdrop-blur-md text-xs font-semibold text-purple-200 mb-4 border border-white/10">
                     <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
                     <span>Hak Akses Terverifikasi: 
-                        <strong class="uppercase tracking-wider text-purple-900">
+                        <strong class="uppercase tracking-wider text-white">
                             {{ auth()->user()->roles->first()->name ?? 'User' }}
                         </strong>
                     </span>
@@ -49,7 +49,7 @@
                     Selamat Datang, {{ auth()->user()->name }}! 👋
                 </h1>
                 
-                <p class="mt-2.5 text-xs sm:text-sm text-gray-700 leading-relaxed">
+                <p class="mt-2.5 text-xs sm:text-sm text-purple-100/90 leading-relaxed">
                     Sistem ini terintegrasi penuh dengan <strong>WhatsApp API Sidobe</strong>. Setiap pencatatan pelanggaran siswa akan secara otomatis memicu pengiriman pesan pemberitahuan ke nomor WhatsApp orang tua/wali murid tanpa jeda.
                 </p>
 
@@ -62,13 +62,13 @@
                             </svg>
                             Input Pelanggaran Baru
                         </a>
-                        <a href="{{ route('pembinaan.create') }}" wire:navigate class="inline-flex items-center gap-2 px-4 py-2.5 bg-white/75 hover:bg-white text-purple-900 border border-purple-200 text-xs font-bold rounded-xl backdrop-blur-sm transition">
+                        <a href="{{ route('pembinaan.create') }}" wire:navigate class="inline-flex items-center gap-2 px-4 py-2.5 bg-white/20 hover:bg-white/30 text-white border border-white/25 text-xs font-bold rounded-xl backdrop-blur-sm transition">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                             </svg>
                             Buka Sesi Konseling
                         </a>
-                        <a href="{{ route('pelanggaran.index') }}" wire:navigate class="inline-flex items-center gap-2 px-4 py-2.5 bg-white/75 hover:bg-white text-purple-900 border border-purple-200 text-xs font-bold rounded-xl backdrop-blur-sm transition">
+                        <a href="{{ route('pelanggaran.index') }}" wire:navigate class="inline-flex items-center gap-2 px-4 py-2.5 bg-white/15 hover:bg-white/25 text-white border border-white/20 text-xs font-bold rounded-xl backdrop-blur-sm transition">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                             </svg>
@@ -81,13 +81,13 @@
                             </svg>
                             Kelola Data Siswa
                         </a>
-                        <a href="{{ route('notifikasi-wa.index') }}" wire:navigate class="inline-flex items-center gap-2 px-4 py-2.5 bg-white/75 hover:bg-white text-purple-900 border border-purple-200 text-xs font-bold rounded-xl backdrop-blur-sm transition">
+                        <a href="{{ route('notifikasi-wa.index') }}" wire:navigate class="inline-flex items-center gap-2 px-4 py-2.5 bg-white/20 hover:bg-white/30 text-white border border-white/25 text-xs font-bold rounded-xl backdrop-blur-sm transition">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                             </svg>
                             Monitoring Log WA
                         </a>
-                        <a href="{{ route('laporan.index') }}" wire:navigate class="inline-flex items-center gap-2 px-4 py-2.5 bg-white/75 hover:bg-white text-purple-900 border border-purple-200 text-xs font-bold rounded-xl backdrop-blur-sm transition">
+                        <a href="{{ route('laporan.index') }}" wire:navigate class="inline-flex items-center gap-2 px-4 py-2.5 bg-white/15 hover:bg-white/25 text-white border border-white/20 text-xs font-bold rounded-xl backdrop-blur-sm transition">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                             </svg>
@@ -106,7 +106,7 @@
                             </svg>
                             Catatan Poin Saya
                         </a>
-                        <a href="{{ route('pembinaan.index') }}" wire:navigate class="inline-flex items-center gap-2 px-4 py-2.5 bg-white/75 hover:bg-white text-purple-900 border border-purple-200 text-xs font-bold rounded-xl backdrop-blur-sm transition">
+                        <a href="{{ route('pembinaan.index') }}" wire:navigate class="inline-flex items-center gap-2 px-4 py-2.5 bg-white/15 hover:bg-white/25 text-white border border-white/20 text-xs font-bold rounded-xl backdrop-blur-sm transition">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                             </svg>
@@ -120,7 +120,7 @@
             <div class="absolute -right-16 -bottom-16 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl pointer-events-none"></div>
             <div class="absolute -top-12 right-24 w-48 h-48 bg-indigo-500/20 rounded-full blur-2xl pointer-events-none"></div>
             <div class="absolute right-10 top-1/2 -translate-y-1/2 hidden xl:block opacity-15">
-                <img src="{{ asset('images/digiself-logo.png') }}" alt="" aria-hidden="true" class="w-64 h-64 object-contain opacity-[0.08] brightness-0" />
+                <img src="{{ asset('images/digiself-logo.png') }}" alt="" aria-hidden="true" class="w-64 h-64 object-contain" />
             </div>
         </div>
 

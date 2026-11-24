@@ -13,9 +13,25 @@
         <!-- Styles / Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="antialiased font-sans bg-white text-gray-800 min-h-screen flex flex-col justify-between relative overflow-x-hidden selection:bg-purple-600 selection:text-white"
+    <body class="antialiased font-sans bg-brand-50 text-gray-800 min-h-screen flex flex-col justify-between relative overflow-x-hidden selection:bg-purple-600 selection:text-white"
           x-data="{ activeTab: 'siswa' }">
         
+        <!-- Background Dekoratif Mewah (Mesh Gradient + Subtle Dot Grid) -->
+        <div class="fixed inset-0 pointer-events-none z-0">
+            <div class="absolute -top-40 -left-40 w-[32rem] h-[32rem] bg-purple-300/35 rounded-full blur-3xl animate-pulse"></div>
+            <div class="absolute top-1/3 -right-32 w-[30rem] h-[30rem] bg-indigo-200/40 rounded-full blur-3xl"></div>
+            <div class="absolute -bottom-32 left-1/3 w-[36rem] h-[36rem] bg-purple-200/35 rounded-full blur-3xl"></div>
+            
+            <svg class="absolute inset-0 w-full h-full opacity-[0.25]" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <pattern id="welcome-dot-pattern" width="28" height="28" patternUnits="userSpaceOnUse">
+                        <circle cx="2" cy="2" r="1.2" fill="#17736D" />
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#welcome-dot-pattern)" />
+            </svg>
+        </div>
+
         <div class="relative z-10 flex flex-col min-h-screen">
             <!-- Header / Navbar Institusional -->
             <header class="w-full border-b border-purple-100/70 bg-white/80 backdrop-blur-md sticky top-0 z-50">
@@ -273,16 +289,16 @@
                     </div>
 
                     <!-- Notifikasi & Integrasi WhatsApp Real-Time Info -->
-                    <div class="mt-6 p-4 rounded-2xl bg-gradient-to-r from-purple-200 to-indigo-300 text-gray-900 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-md shadow-purple-900/10">
+                    <div class="mt-6 p-4 rounded-2xl bg-gradient-to-r from-purple-700 to-indigo-700 text-white flex flex-col sm:flex-row items-center justify-between gap-4 shadow-md shadow-purple-900/10">
                         <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-xl bg-white/75 border border-purple-200 flex items-center justify-center text-purple-800 flex-shrink-0">
+                            <div class="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-md flex items-center justify-center text-white flex-shrink-0">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                                 </svg>
                             </div>
                             <div>
                                 <h4 class="font-bold text-sm">Integrasi Notifikasi Real-Time Sidobe WhatsApp Gateway</h4>
-                                <p class="text-xs text-gray-700 mt-0.5">Setiap perubahan status dan pencatatan pelanggaran otomatis terkirim langsung ke nomor WhatsApp resmi orang tua siswa.</p>
+                                <p class="text-xs text-purple-100 mt-0.5">Setiap perubahan status dan pencatatan pelanggaran otomatis terkirim langsung ke nomor WhatsApp resmi orang tua siswa.</p>
                             </div>
                         </div>
 

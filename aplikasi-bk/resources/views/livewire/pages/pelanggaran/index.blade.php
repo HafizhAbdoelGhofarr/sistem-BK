@@ -160,29 +160,29 @@ new #[Layout('layouts.app')] class extends Component
 
     <!-- Khusus Siswa: Card Status Kedisiplinan Pribadi -->
     @if ($isSiswa)
-        <div class="p-5 rounded-3xl bg-gradient-to-r from-purple-200 via-purple-300 to-indigo-200 text-gray-900 shadow-xl shadow-purple-950/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div class="p-5 rounded-3xl bg-gradient-to-r from-purple-900 via-purple-800 to-indigo-900 text-white shadow-xl shadow-purple-950/15 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div class="flex items-center gap-4">
-                <div class="w-12 h-12 rounded-2xl bg-white/75 border border-purple-200 flex items-center justify-center text-purple-900 font-extrabold text-lg flex-shrink-0">
+                <div class="w-12 h-12 rounded-2xl bg-white/15 backdrop-blur-md flex items-center justify-center text-white font-extrabold text-lg flex-shrink-0">
                     {{ strtoupper(substr($siswaLogin?->nama ?? auth()->user()->name, 0, 1)) }}
                 </div>
                 <div>
-                    <span class="text-[11px] font-bold text-purple-900 uppercase tracking-wider block">Akun Siswa Terdaftar</span>
+                    <span class="text-[11px] font-bold text-purple-200 uppercase tracking-wider block">Akun Siswa Terdaftar</span>
                     <h2 class="text-lg font-bold">{{ $siswaLogin?->nama ?? auth()->user()->name }}</h2>
-                    <div class="text-xs text-gray-700 flex flex-wrap items-center gap-2 mt-0.5">
-                        <span>NIS: <strong class="text-gray-900">{{ $siswaLogin?->nis ?? '-' }}</strong></span>
+                    <div class="text-xs text-purple-200 flex flex-wrap items-center gap-2 mt-0.5">
+                        <span>NIS: <strong class="text-white">{{ $siswaLogin?->nis ?? '-' }}</strong></span>
                         <span>&bull;</span>
-                        <span>Kelas: <strong class="text-gray-900">{{ $siswaLogin?->kelas?->nama ?? '-' }}</strong></span>
+                        <span>Kelas: <strong class="text-white">{{ $siswaLogin?->kelas?->nama ?? '-' }}</strong></span>
                     </div>
                 </div>
             </div>
 
-            <div class="flex items-center gap-5 sm:border-l sm:border-purple-200 sm:pl-6">
+            <div class="flex items-center gap-5 sm:border-l sm:border-white/15 sm:pl-6">
                 <div>
-                    <span class="text-[10px] text-gray-700 uppercase block font-semibold">Akumulasi Poin:</span>
+                    <span class="text-[10px] text-purple-200 uppercase block font-semibold">Akumulasi Poin:</span>
                     <span class="text-2xl font-black text-rose-300">{{ $siswaLogin?->total_poin ?? 0 }} Poin</span>
                 </div>
                 <div>
-                    <span class="text-[10px] text-gray-700 uppercase block font-semibold mb-1">Status Disiplin:</span>
+                    <span class="text-[10px] text-purple-200 uppercase block font-semibold mb-1">Status Disiplin:</span>
                     <x-status-badge :status="$siswaLogin?->status_disiplin ?? 'aman'" />
                 </div>
             </div>
