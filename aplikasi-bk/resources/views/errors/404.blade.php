@@ -13,7 +13,7 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased bg-slate-50 text-gray-800 min-h-screen flex items-center justify-center p-4 relative overflow-hidden selection:bg-purple-600 selection:text-white">
+    <body class="font-sans antialiased bg-brand-50 text-gray-800 min-h-screen flex items-center justify-center p-4 relative overflow-hidden selection:bg-purple-600 selection:text-white">
         
         <!-- Background Dekoratif Mewah (Mesh Gradient + Dots) -->
         <div class="fixed inset-0 pointer-events-none z-0">
@@ -24,7 +24,7 @@
             <svg class="absolute inset-0 w-full h-full opacity-[0.22]" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                     <pattern id="dot-pattern-404" width="28" height="28" patternUnits="userSpaceOnUse">
-                        <circle cx="2" cy="2" r="1.2" fill="#6B46C1" />
+                        <circle cx="2" cy="2" r="1.2" fill="#17736D" />
                     </pattern>
                 </defs>
                 <rect width="100%" height="100%" fill="url(#dot-pattern-404)" />
@@ -39,7 +39,7 @@
                     <x-application-logo />
                 </div>
 
-                <!-- Angka 404 dengan Gradien Ungu Besar -->
+                <!-- Angka 404 dengan gradien hijau mint -->
                 <div class="relative mx-auto mb-4">
                     <span class="text-7xl sm:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-800 via-purple-600 to-indigo-600 tracking-tighter">
                         404
