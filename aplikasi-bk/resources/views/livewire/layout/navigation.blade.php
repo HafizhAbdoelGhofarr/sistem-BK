@@ -37,6 +37,68 @@ new class extends Component
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
+                    <!-- Menu Dropdown DIGISELF (Proposal) -->
+                    <div class="relative" x-data="{ openDigiself: false }" @click.outside="openDigiself = false">
+                        <button @click="openDigiself = !openDigiself" 
+                                class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold transition {{ request()->routeIs('digiself.*') ? 'bg-purple-100 text-purple-900 border border-purple-200' : 'text-gray-600 hover:text-purple-700 hover:bg-purple-50' }}">
+                            <svg class="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                            </svg>
+                            <span>DIGISELF</span>
+                            <span class="px-1.5 py-0.5 rounded-md bg-purple-700 text-white text-[9px] font-extrabold uppercase">Menu</span>
+                            <svg class="w-3 h-3 text-gray-400 transition transform" :class="{ 'rotate-180': openDigiself }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+
+                        <div x-show="openDigiself" 
+                             x-transition:enter="transition ease-out duration-150"
+                             x-transition:enter-start="opacity-0 scale-95"
+                             x-transition:enter-end="opacity-100 scale-100"
+                             x-transition:leave="transition ease-in duration-100"
+                             x-transition:leave-start="opacity-100 scale-100"
+                             x-transition:leave-end="opacity-0 scale-95"
+                             class="absolute left-0 mt-2 w-64 rounded-2xl bg-white/95 backdrop-blur-xl border border-purple-100 shadow-xl py-2 z-50 text-xs"
+                             style="display: none;">
+                            <div class="px-3.5 py-1.5 border-b border-purple-50 text-[10px] font-extrabold uppercase tracking-wider text-purple-700 flex items-center justify-between">
+                                <span>Menu Siswa DIGISELF</span>
+                                <span class="text-gray-400 font-normal">8 Modul</span>
+                            </div>
+                            <a href="{{ route('digiself.beranda') }}" wire:navigate class="flex items-center gap-2.5 px-3.5 py-2 hover:bg-purple-50 text-gray-700 hover:text-purple-900 transition {{ request()->routeIs('digiself.beranda') ? 'font-bold text-purple-700 bg-purple-50/60' : '' }}">
+                                <span class="w-1.5 h-1.5 rounded-full bg-purple-600"></span>
+                                <span>1. Beranda DIGISELF</span>
+                            </a>
+                            <a href="{{ route('digiself.literasi') }}" wire:navigate class="flex items-center gap-2.5 px-3.5 py-2 hover:bg-purple-50 text-gray-700 hover:text-purple-900 transition {{ request()->routeIs('digiself.literasi') ? 'font-bold text-purple-700 bg-purple-50/60' : '' }}">
+                                <span class="w-1.5 h-1.5 rounded-full bg-purple-600"></span>
+                                <span>2. Literasi Digital</span>
+                            </a>
+                            <a href="{{ route('digiself.refleksi') }}" wire:navigate class="flex items-center gap-2.5 px-3.5 py-2 hover:bg-purple-50 text-gray-700 hover:text-purple-900 transition {{ request()->routeIs('digiself.refleksi') ? 'font-bold text-purple-700 bg-purple-50/60' : '' }}">
+                                <span class="w-1.5 h-1.5 rounded-full bg-purple-600"></span>
+                                <span>3. Refleksi Kebiasaan</span>
+                            </a>
+                            <a href="{{ route('digiself.regulasi') }}" wire:navigate class="flex items-center gap-2.5 px-3.5 py-2 hover:bg-purple-50 text-gray-700 hover:text-purple-900 transition {{ request()->routeIs('digiself.regulasi') ? 'font-bold text-purple-700 bg-purple-50/60' : '' }}">
+                                <span class="w-1.5 h-1.5 rounded-full bg-purple-600"></span>
+                                <span>4. Regulasi Diri</span>
+                            </a>
+                            <a href="{{ route('digiself.rencana-aksi') }}" wire:navigate class="flex items-center gap-2.5 px-3.5 py-2 hover:bg-purple-50 text-gray-700 hover:text-purple-900 transition {{ request()->routeIs('digiself.rencana-aksi') ? 'font-bold text-purple-700 bg-purple-50/60' : '' }}">
+                                <span class="w-1.5 h-1.5 rounded-full bg-purple-600"></span>
+                                <span>5. Rencana Aksi</span>
+                            </a>
+                            <a href="{{ route('digiself.jurnal') }}" wire:navigate class="flex items-center gap-2.5 px-3.5 py-2 hover:bg-purple-50 text-gray-700 hover:text-purple-900 transition {{ request()->routeIs('digiself.jurnal') ? 'font-bold text-purple-700 bg-purple-50/60' : '' }}">
+                                <span class="w-1.5 h-1.5 rounded-full bg-purple-600"></span>
+                                <span>6. Jurnal & Evaluasi Diri</span>
+                            </a>
+                            <a href="{{ route('digiself.bantuan') }}" wire:navigate class="flex items-center gap-2.5 px-3.5 py-2 hover:bg-purple-50 text-gray-700 hover:text-purple-900 transition {{ request()->routeIs('digiself.bantuan') ? 'font-bold text-purple-700 bg-purple-50/60' : '' }}">
+                                <span class="w-1.5 h-1.5 rounded-full bg-amber-600"></span>
+                                <span>7. Bantuan Konseling BK</span>
+                            </a>
+                            <a href="{{ route('digiself.tentang') }}" wire:navigate class="flex items-center gap-2.5 px-3.5 py-2 hover:bg-purple-50 text-gray-700 hover:text-purple-900 transition border-t border-purple-50 {{ request()->routeIs('digiself.tentang') ? 'font-bold text-purple-700 bg-purple-50/60' : '' }}">
+                                <span class="w-1.5 h-1.5 rounded-full bg-gray-500"></span>
+                                <span>8. Tentang & Privasi</span>
+                            </a>
+                        </div>
+                    </div>
+
                     <!-- Menu Pelanggaran -->
                     <x-nav-link :href="route('pelanggaran.index')" :active="request()->routeIs('pelanggaran.index')" wire:navigate class="px-3 py-2 rounded-xl text-xs font-bold transition">
                         <svg class="w-4 h-4 me-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -138,6 +200,39 @@ new class extends Component
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate class="rounded-xl">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+
+            <!-- Menu DIGISELF Mobile -->
+            <div class="pt-2 pb-1 text-[10px] font-extrabold uppercase tracking-wider text-purple-700 px-3">
+                Modul DIGISELF Siswa
+            </div>
+            <x-responsive-nav-link :href="route('digiself.beranda')" :active="request()->routeIs('digiself.beranda')" wire:navigate class="rounded-xl">
+                {{ __('1. Beranda DIGISELF') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('digiself.literasi')" :active="request()->routeIs('digiself.literasi')" wire:navigate class="rounded-xl">
+                {{ __('2. Literasi Digital') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('digiself.refleksi')" :active="request()->routeIs('digiself.refleksi')" wire:navigate class="rounded-xl">
+                {{ __('3. Refleksi Kebiasaan') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('digiself.regulasi')" :active="request()->routeIs('digiself.regulasi')" wire:navigate class="rounded-xl">
+                {{ __('4. Regulasi Diri') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('digiself.rencana-aksi')" :active="request()->routeIs('digiself.rencana-aksi')" wire:navigate class="rounded-xl">
+                {{ __('5. Rencana Aksi') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('digiself.jurnal')" :active="request()->routeIs('digiself.jurnal')" wire:navigate class="rounded-xl">
+                {{ __('6. Jurnal & Evaluasi Diri') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('digiself.bantuan')" :active="request()->routeIs('digiself.bantuan')" wire:navigate class="rounded-xl">
+                {{ __('7. Bantuan Konseling BK') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('digiself.tentang')" :active="request()->routeIs('digiself.tentang')" wire:navigate class="rounded-xl">
+                {{ __('8. Tentang & Privasi') }}
+            </x-responsive-nav-link>
+
+            <div class="pt-2 pb-1 text-[10px] font-extrabold uppercase tracking-wider text-gray-400 px-3">
+                Layanan Sekolah
+            </div>
 
             <x-responsive-nav-link :href="route('pelanggaran.index')" :active="request()->routeIs('pelanggaran.index')" wire:navigate class="rounded-xl">
                 {{ __('Riwayat Pelanggaran') }}

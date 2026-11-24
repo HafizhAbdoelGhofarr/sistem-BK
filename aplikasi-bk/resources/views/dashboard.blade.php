@@ -8,10 +8,10 @@
                     </span>
                 </div>
                 <h2 class="font-extrabold text-2xl sm:text-3xl text-gray-900 leading-tight tracking-tight mt-1.5">
-                    Dashboard Bimbingan Konseling
+                    Dashboard DIGISELF
                 </h2>
                 <p class="text-xs text-gray-500">
-                    Pusat Monitoring Kedisiplinan Siswa, Pembinaan Karakter, dan Notifikasi Otomatis Orang Tua
+                    Media Digital BK untuk Penguatan Literasi Digital, Regulasi Diri, dan Layanan Bimbingan Konseling
                 </p>
             </div>
 
@@ -21,7 +21,7 @@
                     {{ \Carbon\Carbon::now()->translatedFormat('l, d F Y') }}
                 </span>
                 <span class="text-[11px] text-purple-700 font-semibold mt-0.5">
-                    Ruang Bimbingan Konseling Digital
+                    DIGISELF &bull; Digital Self-Development
                 </span>
             </div>
         </div>
@@ -94,17 +94,23 @@
                             Laporan Rekap
                         </a>
                     @else
-                        <a href="{{ route('pelanggaran.index') }}" wire:navigate class="inline-flex items-center gap-2 px-4 py-2.5 bg-white text-purple-900 hover:bg-purple-50 text-xs font-bold rounded-xl shadow-md transition">
+                        <a href="{{ route('digiself.beranda') }}" wire:navigate class="inline-flex items-center gap-2 px-4 py-2.5 bg-white text-purple-900 hover:bg-purple-50 text-xs font-bold rounded-xl shadow-md transition transform hover:-translate-y-0.5">
                             <svg class="w-4 h-4 text-purple-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                            </svg>
+                            Modul DIGISELF
+                        </a>
+                        <a href="{{ route('pelanggaran.index') }}" wire:navigate class="inline-flex items-center gap-2 px-4 py-2.5 bg-white/20 hover:bg-white/30 text-white border border-white/25 text-xs font-bold rounded-xl backdrop-blur-sm transition">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
-                            Lihat Catatan Poin Saya
+                            Catatan Poin Saya
                         </a>
                         <a href="{{ route('pembinaan.index') }}" wire:navigate class="inline-flex items-center gap-2 px-4 py-2.5 bg-white/75 hover:bg-white text-purple-900 border border-purple-200 text-xs font-bold rounded-xl backdrop-blur-sm transition">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                             </svg>
-                            Sesi Pembinaan Saya
+                            Sesi Pembinaan BK
                         </a>
                     @endif
                 </div>
@@ -320,6 +326,118 @@
                     </p>
                 </div>
             @endif
+        </div>
+
+        <!-- Modul DIGISELF: Media Digital Penguatan Literasi Digital & Regulasi Diri (Proposal) -->
+        <div class="bg-white/95 backdrop-blur-md border border-purple-100 rounded-3xl p-6 sm:p-8 shadow-sm space-y-6">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-gray-100 gap-3">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-purple-700">Modul Khusus Siswa / Mahasiswa</span>
+                    <h3 class="text-xl font-extrabold text-gray-900 mt-0.5">DIGISELF: Literasi Digital & Regulasi Diri</h3>
+                    <p class="text-xs text-gray-500 mt-0.5">Media Digital Bimbingan dan Konseling berbasis edukasi, refleksi diri, dan pembentukan kebiasaan positif</p>
+                </div>
+                <a href="{{ route('digiself.beranda') }}" wire:navigate class="inline-flex items-center gap-1.5 px-4 py-2 bg-gradient-to-r from-purple-700 to-purple-600 hover:from-purple-800 hover:to-purple-700 text-white font-bold text-xs rounded-xl shadow-sm transition">
+                    Buka Panduan & Alur DIGISELF &rarr;
+                </a>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <!-- 1. Beranda -->
+                <a href="{{ route('digiself.beranda') }}" wire:navigate class="p-4 rounded-2xl bg-purple-50/50 hover:bg-purple-100/70 border border-purple-100 transition group flex flex-col justify-between">
+                    <div>
+                        <div class="w-8 h-8 rounded-xl bg-purple-700 text-white flex items-center justify-center font-bold text-xs mb-2 shadow-xs group-hover:scale-105 transition">
+                            01
+                        </div>
+                        <h4 class="font-bold text-xs text-gray-900 group-hover:text-purple-800">Beranda DIGISELF</h4>
+                        <p class="text-[11px] text-gray-500 mt-1 leading-snug">Pengenalan, tujuan, dan alur bertahap penggunaan sistem.</p>
+                    </div>
+                    <span class="text-[10px] font-bold text-purple-700 mt-3 block">Buka Beranda &rarr;</span>
+                </a>
+
+                <!-- 2. Literasi Digital -->
+                <a href="{{ route('digiself.literasi') }}" wire:navigate class="p-4 rounded-2xl bg-purple-50/50 hover:bg-purple-100/70 border border-purple-100 transition group flex flex-col justify-between">
+                    <div>
+                        <div class="w-8 h-8 rounded-xl bg-purple-700 text-white flex items-center justify-center font-bold text-xs mb-2 shadow-xs group-hover:scale-105 transition">
+                            02
+                        </div>
+                        <h4 class="font-bold text-xs text-gray-900 group-hover:text-purple-800">Literasi Digital</h4>
+                        <p class="text-[11px] text-gray-500 mt-1 leading-snug">4 dimensi materi: evaluasi info, etika, keamanan & privasi.</p>
+                    </div>
+                    <span class="text-[10px] font-bold text-purple-700 mt-3 block">Materi & Kuis &rarr;</span>
+                </a>
+
+                <!-- 3. Refleksi Kebiasaan -->
+                <a href="{{ route('digiself.refleksi') }}" wire:navigate class="p-4 rounded-2xl bg-purple-50/50 hover:bg-purple-100/70 border border-purple-100 transition group flex flex-col justify-between">
+                    <div>
+                        <div class="w-8 h-8 rounded-xl bg-purple-700 text-white flex items-center justify-center font-bold text-xs mb-2 shadow-xs group-hover:scale-105 transition">
+                            03
+                        </div>
+                        <h4 class="font-bold text-xs text-gray-900 group-hover:text-purple-800">Refleksi Kebiasaan</h4>
+                        <p class="text-[11px] text-gray-500 mt-1 leading-snug">Tinjau screen time harian dan situasi pemicu distraksi.</p>
+                    </div>
+                    <span class="text-[10px] font-bold text-purple-700 mt-3 block">Isi Refleksi &rarr;</span>
+                </a>
+
+                <!-- 4. Regulasi Diri -->
+                <a href="{{ route('digiself.regulasi') }}" wire:navigate class="p-4 rounded-2xl bg-purple-50/50 hover:bg-purple-100/70 border border-purple-100 transition group flex flex-col justify-between">
+                    <div>
+                        <div class="w-8 h-8 rounded-xl bg-purple-700 text-white flex items-center justify-center font-bold text-xs mb-2 shadow-xs group-hover:scale-105 transition">
+                            04
+                        </div>
+                        <h4 class="font-bold text-xs text-gray-900 group-hover:text-purple-800">Regulasi Diri</h4>
+                        <p class="text-[11px] text-gray-500 mt-1 leading-snug">Strategi fokus, Pomodoro 25:5, dan kendali distraksi.</p>
+                    </div>
+                    <span class="text-[10px] font-bold text-purple-700 mt-3 block">Pelajari Strategi &rarr;</span>
+                </a>
+
+                <!-- 5. Rencana Aksi -->
+                <a href="{{ route('digiself.rencana-aksi') }}" wire:navigate class="p-4 rounded-2xl bg-purple-50/50 hover:bg-purple-100/70 border border-purple-100 transition group flex flex-col justify-between">
+                    <div>
+                        <div class="w-8 h-8 rounded-xl bg-purple-700 text-white flex items-center justify-center font-bold text-xs mb-2 shadow-xs group-hover:scale-105 transition">
+                            05
+                        </div>
+                        <h4 class="font-bold text-xs text-gray-900 group-hover:text-purple-800">Rencana Aksi</h4>
+                        <p class="text-[11px] text-gray-500 mt-1 leading-snug">Tetapkan target dan langkah perubahan yang terukur.</p>
+                    </div>
+                    <span class="text-[10px] font-bold text-purple-700 mt-3 block">Susun Aksi &rarr;</span>
+                </a>
+
+                <!-- 6. Jurnal & Evaluasi -->
+                <a href="{{ route('digiself.jurnal') }}" wire:navigate class="p-4 rounded-2xl bg-purple-50/50 hover:bg-purple-100/70 border border-purple-100 transition group flex flex-col justify-between">
+                    <div>
+                        <div class="w-8 h-8 rounded-xl bg-purple-700 text-white flex items-center justify-center font-bold text-xs mb-2 shadow-xs group-hover:scale-105 transition">
+                            06
+                        </div>
+                        <h4 class="font-bold text-xs text-gray-900 group-hover:text-purple-800">Jurnal & Evaluasi</h4>
+                        <p class="text-[11px] text-gray-500 mt-1 leading-snug">Catat evaluasi harian dan pantau kemajuan regulasi diri.</p>
+                    </div>
+                    <span class="text-[10px] font-bold text-purple-700 mt-3 block">Tulis Jurnal &rarr;</span>
+                </a>
+
+                <!-- 7. Bantuan BK -->
+                <a href="{{ route('digiself.bantuan') }}" wire:navigate class="p-4 rounded-2xl bg-amber-50/60 hover:bg-amber-100/70 border border-amber-200 transition group flex flex-col justify-between">
+                    <div>
+                        <div class="w-8 h-8 rounded-xl bg-amber-600 text-white flex items-center justify-center font-bold text-xs mb-2 shadow-xs group-hover:scale-105 transition">
+                            07
+                        </div>
+                        <h4 class="font-bold text-xs text-gray-900 group-hover:text-amber-800">Bantuan Konseling BK</h4>
+                        <p class="text-[11px] text-gray-500 mt-1 leading-snug">Konsultasi mandiri bersama konselor/Guru BK sekolah.</p>
+                    </div>
+                    <span class="text-[10px] font-bold text-amber-700 mt-3 block">Hubungi Konselor &rarr;</span>
+                </a>
+
+                <!-- 8. Tentang & Privasi -->
+                <a href="{{ route('digiself.tentang') }}" wire:navigate class="p-4 rounded-2xl bg-slate-50 hover:bg-slate-100 border border-slate-200 transition group flex flex-col justify-between">
+                    <div>
+                        <div class="w-8 h-8 rounded-xl bg-slate-700 text-white flex items-center justify-center font-bold text-xs mb-2 shadow-xs group-hover:scale-105 transition">
+                            08
+                        </div>
+                        <h4 class="font-bold text-xs text-gray-900 group-hover:text-slate-900">Tentang & Privasi</h4>
+                        <p class="text-[11px] text-gray-500 mt-1 leading-snug">Landasan etika, batas otomatisasi, dan data pengguna.</p>
+                    </div>
+                    <span class="text-[10px] font-bold text-slate-700 mt-3 block">Lihat Batasan &rarr;</span>
+                </a>
+            </div>
         </div>
 
         <!-- 3. Bagian Interaktif: Indikator Batas Kedisiplinan & Tab Filter -->

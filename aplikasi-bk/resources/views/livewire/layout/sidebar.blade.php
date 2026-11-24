@@ -132,6 +132,19 @@ new class extends Component
                 </a>
             @endif
 
+            <div class="px-3 pt-4 pb-1.5 text-[10px] font-extrabold uppercase tracking-wider text-purple-700">
+                DIGISELF (Siswa)
+            </div>
+
+            <!-- Modul DIGISELF Siswa -->
+            <a href="{{ route('digiself.beranda') }}" wire:navigate
+               class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition duration-150 {{ request()->routeIs('digiself.*') ? 'bg-gradient-to-r from-purple-700 to-purple-600 text-white font-bold shadow-md shadow-purple-600/20' : 'text-gray-600 hover:text-purple-700 hover:bg-purple-50/70' }}">
+                <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                </svg>
+                <span>Modul DIGISELF</span>
+            </a>
+
             <div class="px-3 pt-4 pb-1.5 text-[10px] font-extrabold uppercase tracking-wider text-gray-400">
                 Pedoman
             </div>
@@ -167,7 +180,7 @@ new class extends Component
         </button>
 
         <div class="pt-2 text-center text-[10px] text-gray-400">
-            Sistem Informasi BK &bull; Panel Staff
+            DIGISELF BK &bull; Panel Staff
         </div>
     </div>
 </aside>

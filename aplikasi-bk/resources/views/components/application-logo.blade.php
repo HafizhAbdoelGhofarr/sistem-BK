@@ -4,10 +4,10 @@
     </div>
     <div class="flex flex-col text-left">
         <span class="font-bold text-lg leading-tight tracking-tight text-gray-900">
-            Sistem<span class="text-purple-700">BK</span>
+            DIGI<span class="text-purple-700">SELF</span>
         </span>
-        <span class="text-[11px] font-medium tracking-wide uppercase text-gray-500">
-            Bimbingan Konseling
+        <span class="text-[11px] font-semibold tracking-wide uppercase text-purple-700">
+            Digital Self-Development
         </span>
     </div>
 </div>
