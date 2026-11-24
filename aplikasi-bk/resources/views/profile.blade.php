@@ -25,7 +25,7 @@
             <div class="absolute -bottom-12 -left-12 w-40 h-40 bg-indigo-50/50 rounded-full blur-2xl pointer-events-none"></div>
 
             <div class="relative z-10 flex flex-col items-center">
-                <!-- Foto Profil Bulat Besar dengan Cincin Gradien Ungu -->
+                <!-- Foto profil bulat besar dengan cincin gradien hijau mint -->
                 <div class="relative mb-4">
                     <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-gradient-to-tr from-purple-700 via-purple-600 to-indigo-600 text-white flex items-center justify-center font-black text-3xl sm:text-4xl shadow-xl shadow-purple-600/25 border-4 border-white ring-4 ring-purple-100 overflow-hidden">
                         @if (auth()->user()->avatar && \Illuminate\Support\Facades\Storage::disk('public')->exists(auth()->user()->avatar))

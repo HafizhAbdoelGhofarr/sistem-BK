@@ -6,10 +6,6 @@
                     <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-purple-100 text-purple-800 border border-purple-200">
                         Semester Genap &bull; TA 2026/2027
                     </span>
-                    <span class="inline-flex items-center gap-1.5 text-xs text-emerald-600 font-semibold bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
-                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
-                        Sidobe WA Aktif
-                    </span>
                 </div>
                 <h2 class="font-extrabold text-2xl sm:text-3xl text-gray-900 leading-tight tracking-tight mt-1.5">
                     Dashboard Bimbingan Konseling
@@ -37,7 +33,7 @@
         showGuideModal: false
     }">
 
-        <!-- 1. Banner Sambutan Premium (Gradien Ungu & Aksen Emas) -->
+        <!-- 1. Banner sambutan premium dengan gradien hijau mint -->
         <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-purple-900 via-purple-800 to-indigo-900 text-white p-7 sm:p-9 shadow-xl shadow-purple-950/15">
             <div class="relative z-10 max-w-2xl">
                 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 backdrop-blur-md text-xs font-semibold text-purple-200 mb-4 border border-white/10">
@@ -118,9 +114,7 @@
             <div class="absolute -right-16 -bottom-16 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl pointer-events-none"></div>
             <div class="absolute -top-12 right-24 w-48 h-48 bg-indigo-500/20 rounded-full blur-2xl pointer-events-none"></div>
             <div class="absolute right-10 top-1/2 -translate-y-1/2 hidden xl:block opacity-15">
-                <svg class="w-64 h-64 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                </svg>
+                <img src="{{ asset('images/digiself-logo.png') }}" alt="" aria-hidden="true" class="w-64 h-64 object-contain" />
             </div>
         </div>
 

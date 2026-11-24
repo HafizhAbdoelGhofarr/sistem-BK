@@ -74,7 +74,7 @@ new #[Layout('layouts.app')] class extends Component
         </a>
     </div>
 
-    <!-- Container Form Putih & Ungu -->
+    <!-- Container form putih dengan aksen hijau mint -->
     <div class="bg-white/95 backdrop-blur-md border border-purple-100 shadow-xl shadow-purple-900/5 rounded-3xl p-6 sm:p-8">
         <form wire:submit="simpan" class="space-y-6">
             

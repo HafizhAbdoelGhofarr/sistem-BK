@@ -13,7 +13,7 @@
         <!-- Styles / Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="antialiased font-sans bg-slate-50 text-gray-800 min-h-screen flex flex-col justify-between relative overflow-x-hidden selection:bg-purple-600 selection:text-white"
+    <body class="antialiased font-sans bg-brand-50 text-gray-800 min-h-screen flex flex-col justify-between relative overflow-x-hidden selection:bg-purple-600 selection:text-white"
           x-data="{ activeTab: 'siswa' }">
         
         <!-- Background Dekoratif Mewah (Mesh Gradient + Subtle Dot Grid) -->
@@ -25,7 +25,7 @@
             <svg class="absolute inset-0 w-full h-full opacity-[0.25]" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                     <pattern id="welcome-dot-pattern" width="28" height="28" patternUnits="userSpaceOnUse">
-                        <circle cx="2" cy="2" r="1.2" fill="#7C3AED" />
+                        <circle cx="2" cy="2" r="1.2" fill="#17736D" />
                     </pattern>
                 </defs>
                 <rect width="100%" height="100%" fill="url(#welcome-dot-pattern)" />

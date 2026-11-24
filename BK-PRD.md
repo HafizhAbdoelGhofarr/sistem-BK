@@ -6,10 +6,10 @@
 ### 📌 INFORMASI PROYEK
 - **Nama Proyek:** Aplikasi Bimbingan Konseling & Tata Tertib Siswa (Sistem BK)
 - **Tim Pengembang (Dua Orang):**
-  - **Farrel:** Frontend Developer (UI/UX, Blade/Livewire Views, Layouting, Styling White & Purple)
+  - **Farrel:** Frontend Developer (UI/UX, Blade/Livewire Views, Layouting, Styling White & Light Green)
   - **Hafiz:** Backend Developer (Database, Migration, Service Layer, Queue, Sidobe WhatsApp API)
 - **Status Backend:** Selesai (Database & Service Layer siap dikonsumsi Frontend)
-- **Tema Desain UI:** Minimalis, Elegan, Modern (*White & Clean Purple Theme*)
+- **Tema Desain UI:** Minimalis, Elegan, Modern (*White & Mint Green Theme*)
 
 ---
 
@@ -59,19 +59,21 @@ Sistem dirancang mencakup kebutuhan civitas sekolah dengan pembagian hak akses:
 
 ---
 
-## 3. DESIGN SYSTEM & ATURAN TEMA (WHITE & PURPLE)
+## 3. DESIGN SYSTEM & ATURAN TEMA (WHITE & MINT GREEN)
 
-Sesuai arahan kebutuhan visual, frontend mengusung gaya **Simple, Clean, Modern dengan dominasi Putih dan Aksen Ungu**.
+Sesuai referensi identitas DIGISELF, frontend mengusung gaya **Simple, Clean, Modern dengan dominasi hijau mint muda, permukaan putih, dan aksen hijau-teal**.
 
 ### 3.1 Palet Warna (Color Palette)
 
 | Kategori Warna | Kode Hex | Penggunaan UI |
 |---|---|---|
-| **Primary Purple** | `#6B46C1` (Purple-700) | Warna utama, Sidebar aktif, Header Brand, Tombol Utama |
-| **Primary Accent** | `#805AD5` (Purple-600) | Hover state tombol, border fokus form, badge aktif |
-| **Soft Purple Tint** | `#F3E8FF` (Purple-100) | Background kartu highlight, background badge, row hover |
+| **Mint Canvas** | `#F3FFF5` | Latar utama aplikasi dan kanvas halaman |
+| **Soft Green Tint** | `#DDF7E2` | Background kartu highlight, badge, dan row hover |
+| **Primary Green-Teal** | `#17736D` | Sidebar aktif, header brand, tombol utama, dan tautan |
+| **Green Accent** | `#55B971` | Aksen hijau muda, hover state, indikator aktif |
+| **Deep Teal** | `#103743` | Teks brand dan latar gelap beraksen |
 | **Pure White** | `#FFFFFF` | Background konten utama, card container, modal, form input |
-| **Subtle Gray** | `#F9FAFB` (Gray-50) | Background body/canvas aplikasi |
+| **Subtle Gray** | `#F9FAFB` (Gray-50) | Permukaan netral sekunder |
 | **Border Gray** | `#E5E7EB` (Gray-200) | Garis pemisah tabel, border card, border input form |
 | **Text Primary** | `#1F2937` (Gray-800) | Teks judul, label form, teks tabel |
 | **Text Muted** | `#6B7280` (Gray-500) | Subtitle, placeholder, waktu riwayat |
@@ -85,8 +87,8 @@ Untuk kartu status kedisiplinan siswa, digunakan badge dengan warna yang tegas:
 
 ### 3.3 Pedoman Tipografi & Komponen
 - **Font Family:** Inter / Plus Jakarta Sans / Sans-Serif Native
-- **Tombol Utama (Primary Button):** Background `#6B46C1`, teks putih, sudut rounded (`rounded-lg`), efek hover transisi lembut ke `#553C9A`.
-- **Form Input:** Background putih bersih, border abu-abu tipis (`#E5E7EB`), outline fokus ungu lembut (`ring-2 ring-purple-300`).
+- **Tombol Utama (Primary Button):** Background `#17736D`, teks putih, sudut rounded (`rounded-lg`), efek hover transisi lembut ke `#155C63`.
+- **Form Input:** Background putih bersih, border abu-abu tipis (`#E5E7EB`), outline fokus hijau lembut.
 - **Card Container:** Background putih, shadow halus (`shadow-sm` sampai `shadow-md`), rounded-xl, padding lega (clean padding).
 
 ---
@@ -100,7 +102,7 @@ Untuk menjaga kerapian repositori dan batasan pekerjaan tim:
 │        FARREL (FRONTEND DEVELOPER)           │         HAFIZ (BACKEND DEVELOPER)            │
 ├──────────────────────────────────────────────┼──────────────────────────────────────────────┤
 │ • Desain Halaman Auth (Login, Register, Lupa)│ • Database Migration & Model Eloquent        │
-│ • Layouting Blade Auth (Clean Purple/White)  │ • Service Layer (Pelanggaran, Pembinaan)     │
+│ • Layouting Blade Auth (Clean Mint/White)    │ • Service Layer (Pelanggaran, Pembinaan)     │
 │ • Pembuatan Layout Induk (App, Nav, Sidebar) │ • Logika Autentikasi, Password Reset & Hash │
 │ • Komponen Tabel Data & Pagination           │ • Integrasi API Sidobe WhatsApp Gateway      │
 │ • Form Input Pelanggaran & Pembinaan         │ • Queue Job (Notifikasi WA Background)       │
@@ -114,7 +116,7 @@ Untuk menjaga kerapian repositori dan batasan pekerjaan tim:
 
 ## 5. FITUR AUTENTIKASI & SISTEM ALUR PASCA-AUTENTIKASI
 
-Modul autentikasi dirancang ramah pengguna (*user-friendly*) dengan tema dominan putih dan ungu, dilengkapi fitur keamanan standar.
+Modul autentikasi dirancang ramah pengguna (*user-friendly*) dengan latar hijau mint muda, kartu putih, dan aksen hijau-teal, dilengkapi fitur keamanan standar.
 
 ```
                       ┌────────────────────────────────┐
@@ -142,7 +144,7 @@ Modul autentikasi dirancang ramah pengguna (*user-friendly*) dengan tema dominan
 
 ### 5.1 Fitur Login
 - **Field Form:** Email / Username / NIS dan Password, Checkbox "Ingat Saya" (*Remember Me*).
-- **Tampilan UI:** Kartu putih terpusat (*centered card*) dengan aksen ungu, logo sekolah/aplikasi BK, dan link bantuan ("Belum punya akun? Daftar" dan "Lupa Password?").
+- **Tampilan UI:** Kartu putih terpusat (*centered card*) dengan aksen hijau-teal, logo sekolah/aplikasi BK, dan link bantuan ("Belum punya akun? Daftar" dan "Lupa Password?").
 - **Validasi & Keamanan:** Pembatasan percobaan login (Rate Limiting/Throttling) dan enkripsi password `bcrypt`.
 
 ### 5.2 Fitur Registrasi (Khusus Siswa)
@@ -176,7 +178,7 @@ Sistem setelah proses autentikasi (Login, Register, Lupa Password) mengatur ke m
    - **Role `admin`:** Otomatis dialihkan ke `/admin/dashboard` (Statistik sekolah, grafik pelanggaran, total siswa).
    - **Role `guru_bk`:** Otomatis dialihkan ke `/guru-bk/dashboard` (Daftar siswa prioritas pembinaan, kasus aktif).
    - **Role `siswa`:** Otomatis dialihkan ke `/siswa/dashboard` (Kartu status poin pribadi, notifikasi pembinaan).
-4. **Flash Notification:** Menampilkan toast alert ungu lembut: *"Selamat Datang, [Nama Pengguna]!"*.
+4. **Flash Notification:** Menampilkan toast alert hijau lembut: *"Selamat Datang, [Nama Pengguna]!"*.
 
 #### B. Alur Sistem Setelah Registrasi Berhasil:
 1. **Penghubungan Akun (Account Binding):** Sistem mengaitkan `user_id` baru ke baris `siswa` yang cocok dengan NIS.
@@ -188,12 +190,12 @@ Sistem setelah proses autentikasi (Login, Register, Lupa Password) mengatur ke m
 #### C. Alur Sistem Setelah Lupa Password (Reset Selesai):
 1. **Invalidasi Sesi Lama:** Semua token reset yang telah dipakai langsung dihapus agar tidak dapat digunakan kembali.
 2. **Pengalihan ke Login:** User dialihkan secara otomatis ke halaman `/login`.
-3. **Flash Notification:** Pesan sukses berwarna hijau/ungu: *"Password berhasil diperbarui! Silakan masuk dengan password baru Anda."*
+3. **Flash Notification:** Pesan sukses berwarna hijau: *"Password berhasil diperbarui! Silakan masuk dengan password baru Anda."*
 
 #### D. Sistem Proteksi Akses & Middleware:
 1. **Guest Middleware (`guest`):** Mencegah pengguna yang sudah login untuk mengakses kembali halaman `/login`, `/register`, atau `/forgot-password` (langsung diarahkan ke dashboard masing-masing).
 2. **Auth Middleware (`auth`):** Memblokir akses ke halaman dalam bagi pengunjung anonim dan mengarahkan mereka ke `/login`.
-3. **Role Permission Guard:** Menjaga isolasi antar-role; siswa dilarang keras membuka rute `/admin/*` atau `/guru-bk/*` (akan memunculkan halaman error 403 Forbidden bertema ungu/putih).
+3. **Role Permission Guard:** Menjaga isolasi antar-role; siswa dilarang keras membuka rute `/admin/*` atau `/guru-bk/*` (akan memunculkan halaman error 403 Forbidden bertema hijau mint dan putih).
 4. **Alur Logout (Keluar Sistem):** Menghancurkan session, menghapus cookie remember-token, dan mengarahkan kembali ke `/login`.
 
 ---
@@ -250,7 +252,7 @@ Sistem setelah proses autentikasi (Login, Register, Lupa Password) mengatur ke m
 ```
 ├── / (Root)                       -> Redirect otomatis ke /login jika belum auth
 │
-├── AUTHENTICATION PAGES (Tema: White & Purple Card)
+├── AUTHENTICATION PAGES (Tema: Mint Green & White Card)
 │   ├── /login                     -> Halaman Masuk Akun
 │   ├── /register                  -> Halaman Pendaftaran Akun Siswa (Validasi NIS)
 │   ├── /forgot-password           -> Form Permintaan Reset Password
@@ -283,13 +285,13 @@ Sistem setelah proses autentikasi (Login, Register, Lupa Password) mengatur ke m
 
 ## 8. RENCANA IMPLEMENTASI FRONTEND (FARREL)
 
-1. **Sprint 1: Modul Autentikasi & Desain Sistem (White & Purple)**
-   - Setup styling Tailwind CSS palet warna Purple & White.
+1. **Sprint 1: Modul Autentikasi & Desain Sistem (Mint Green & White)**
+   - Setup styling Tailwind CSS dengan palet hijau mint, hijau-teal, dan putih.
    - Merancang halaman `login.blade.php`, `register.blade.php`, `forgot-password.blade.php`, dan `reset-password.blade.php`.
    - Menguji alur perpindahan pasca-login (redirection ke dashboard Admin, Guru BK, dan Siswa).
 
 2. **Sprint 2: Master Layout & Komponen Global**
-   - Pembuatan layout induk `app.blade.php` (Sidebar collapsible ungu gelap/putih, Topbar bersih, Card Container).
+   - Pembuatan layout induk `app.blade.php` (Sidebar collapsible deep teal/putih, Topbar bersih, Card Container).
    - Komponen badge status kedisiplinan (Aman, Perhatian, Pembinaan, Kritis) dan flash toast notifikasi.
 
 3. **Sprint 3: Halaman Master Data & Form Pelanggaran**
