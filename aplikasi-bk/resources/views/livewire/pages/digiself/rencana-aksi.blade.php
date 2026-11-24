@@ -160,7 +160,7 @@ new #[Layout('layouts.app')] class extends Component
                                 <div class="space-y-2 flex-1">
                                     <div class="flex items-center gap-2">
                                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider {{ $rencana->status === 'tercapai' ? 'bg-emerald-100 text-emerald-800' : 'bg-purple-100 text-purple-800' }}">
-                                            {{ $rencana->status === 'tercapai' ? 'Tercapai âœ“' : 'Sedang Dijalankan' }}
+                                            {{ $rencana->status === 'tercapai' ? 'Tercapai' : 'Sedang Dijalankan' }}
                                         </span>
                                         <span class="text-[11px] text-gray-400">Dibuat {{ $rencana->created_at->translatedFormat('d M Y') }}</span>
                                     </div>
